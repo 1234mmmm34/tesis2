@@ -15,6 +15,11 @@ body{
     form{
       margin-left:50px;
     }
+
+    .retraso-rojo{
+      background-color: rgb(192, 224, 195); /* Cambia el color de fondo a rojo */
+      color: white; /* Opcional: cambia el color del texto para mejor contraste */
+    }
   
     .contenedor1 {
       width: 70%;

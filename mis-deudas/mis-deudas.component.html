@@ -14,10 +14,10 @@
     </div>
     <hr>
 
-
+ 
     <div class="contenedor1" *ngIf="mostrarGrid">
         <div id="buscar">
-
+  
 
             <input type="text" name="filtrar" placeholder="buscar" id="buscar2" [(ngModel)]="filtroDeudores">
 
@@ -29,11 +29,11 @@
             </select>
 
             <!--
-                        <input type="date" name="filtrarFecha" id="buscar1">
+                        <input type="date" name="filtrarFecha" id="buscar1"> 
 
             -->
 
-
+           
 
         </div>
 
@@ -51,13 +51,13 @@
                         <th>Periodicidad</th>
                         <th>Retraso (dias)</th>
                         <th>Recargo</th>
-                        <th>Total</th>
+                        <th>Total</th> 
                         <th>Acciones y ver más</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr tr mat-row matRowDef="columns: displayedcolumns;"
-                        *ngFor="let deudor of Deudores_totales; let i = index" [ngClass]="{ 'row-red': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 }">
+                        *ngFor="let deudor of Deudores_totales2; let i = index" [ngClass]="{ 'row-red': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 }">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ deudor.tipo_deuda }}</td>
                         <td>{{ deudor.nombre_deuda }}</td>
@@ -67,11 +67,13 @@
                             {{calcularProximoPago(deudor.proximo_pago,deudor.periodicidad)}}
                         </td>
                         <td>{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
-                        <td class="dias-retraso">{{ calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad) }}</td>
+                        <td [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
+                            {{ calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) }}
+                          </td>
                         <td>{{deudor.recargo === 0 ? '-' : '$'+deudor.recargo+' MXN'}}</td>
-                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad), deudor.periodicidad, deudor.monto, deudor.recargo)}} MXN</td>
+                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad), deudor.monto, deudor.recargo)}} MXN</td>
                         <td style="padding-left: 4%;"> <mat-icon style="font-size:medium;"  for="modal">visibility</mat-icon> </td>
-                    </tr>
+                    </tr> 
                 </tbody>
             </table>
 
@@ -91,3 +93,4 @@
         </ng-template>
     </div>
 </body>
+  

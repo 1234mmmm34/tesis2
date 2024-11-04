@@ -73,36 +73,6 @@ export class IngresosComponent {
 
     })
 
-    /*
-       this.UserGroup = this.fb.group({
-            fraccionamiento: ['', Validators.required],
-            monto: ['', Validators.required],
-            nombre: ['', Validators.required],
-            descripcion: ['', Validators.required],
-            dias_gracia: ['', Validators.required],
-            periodicidad: ['', Validators.required],
-            recargo: ['', Validators.required],
-            proximo_pago: ['', Validators.required],
-            destinatario: ['', Validators.required],
-            
-       
-          })
-   
-          this.UserGroup2 = this.fb.group({
-           fraccionamiento: ['', Validators.required],
-           monto: ['', Validators.required],
-           nombre: ['', Validators.required],
-           descripcion: ['', Validators.required],
-           dias_gracia: ['', Validators.required],
-           periodicidad: ['', Validators.required],
-           recargo: ['', Validators.required],
-           proximo_pago: ['', Validators.required],
-           destinatario2: ['', Validators.required],
-           cboxpersonas: ['', Validators.required],
-           
-           
-         })
-   */
   }
 
   ngOnInit(): void {

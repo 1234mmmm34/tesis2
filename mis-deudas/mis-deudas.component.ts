@@ -88,12 +88,18 @@ export class MisDeudasComponent {
   ConsultarDeudores(tipo_deuda: number){
     this.loadingService.show();
     console.log("aaaaaaaa: " + this.dataService.obtener_usuario(4))
-    this.personasService.consultarDeudoresUsuarios(this.dataService.obtener_usuario(1), tipo_deuda).subscribe(
+    this.personasService.consultarDeudores(this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(1)).subscribe(
       (deudasUsuario: Deudores[]) => {
         this.loadingService.hide();
         this.mostrarGrid = true;
 
        this.Deudores_totales = deudasUsuario
+       this.indice = 0;
+       this.cont = 1;
+       this.verdaderoRango = 6;
+       this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
+
+
         console.log('deudas', this.Deudores_totales);
         if(this.Deudores_totales.length==0){
           Swal.fire({
@@ -123,7 +129,7 @@ export class MisDeudasComponent {
 
     return Math.max(0, diasRetraso); // Devuelve al menos cero si la fecha ya ha pasado
   }
-
+/*
   calcularTotal(retraso: number, periodicidad: number, monto: number, recargo: number): number {
     let total = 0;
     if(periodicidad!=0){
@@ -131,6 +137,21 @@ export class MisDeudasComponent {
     }
     else{
       total = monto;
+
+    }
+    return isNaN(total) ? 0 : parseFloat(total.toFixed(2));
+  }
+    */
+
+  
+  calcularTotal(retraso: number, monto: number, recargo: number): number {
+    let total = 0;
+    if(retraso!=0){
+      total = monto + recargo;
+    }
+    else{
+      total = monto;
+      
 
     }
     return isNaN(total) ? 0 : parseFloat(total.toFixed(2));

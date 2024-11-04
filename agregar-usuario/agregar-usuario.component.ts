@@ -24,7 +24,7 @@ export class AgregarUsuarioComponent {
 
   fraccionamientos: fraccionamientos[] | undefined;
   id_fracc: any;
-  tipo_usuario: any;
+  tipo_usuario: string = '';
   filtroUsuarios: "" | undefined;
   id_usuario: any;
   tesorero: any;
@@ -34,6 +34,39 @@ export class AgregarUsuarioComponent {
   indice: number = 0;
   verdaderoRango: number = 6;
   cont: number = 1;
+
+  
+
+  constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private invitacionService: InvitacionService, private correoService: CorreoService, private loadingService: LoadingService) {
+
+    this.UserGroup = this.fb.group({
+      id_persona: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido_pat: ['', Validators.required],
+      apellido_mat: ['', Validators.required],
+      tipo_usuario: [null, Validators.required],
+      id_lote: ['', Validators.required],
+      telefono: ['', Validators.required],
+      fecha_nacimiento: ['', Validators.required],
+      correo: ['', Validators.required],
+      contrasenia: ['', Validators.required],
+      confirmarContrasena: ['', Validators.required],
+      id_fraccionamiento: ['', Validators.required]
+
+  
+    })
+  
+    this.UserGroup1 = this.fb.group({
+      id_persona: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido_pat: ['', Validators.required],
+      apellido_mat: ['', Validators.required],
+      telefono: ['', Validators.required],
+      fecha_nacimiento: ['', Validators.required],
+      tipo_usuario: [null, Validators.required]
+    })
+  }
+
   ngOnInit(): void {
 
     this.fetchDataUsers(this.dataService.obtener_usuario(3));
@@ -59,6 +92,9 @@ export class AgregarUsuarioComponent {
 
   }
 
+
+
+
   fetchDataUsers(id_administrador: any) {
     //  console.log("id admiiiiiiiiiiiiiiiiiiiiiiin: " + id_administrador);
 
@@ -80,21 +116,6 @@ export class AgregarUsuarioComponent {
 
   correo_invitado: string = '';
   correo_invitado1: string = '';
-
-  seleccionar(usuario: any, nombre: any, apellido_pat: any, apellido_mat: any, telefono: any){
-    this.id_usuario = usuario;
-
-    this.UserGroup1 = this.fb.group({
-      id_persona: [usuario, Validators.required],
-      nombre: [nombre, Validators.required],
-      apellido_pat: [apellido_pat, Validators.required],
-      apellido_mat: [apellido_mat, Validators.required],
-      telefono: [telefono, Validators.required],
-      fecha_nacimiento: ['', Validators.required],
-      tipo_usuario: ['', Validators.required]
-    })
-
-  }
 
   enviarCorreo(correoDestinatario: string, mensaje: string): void {
    
@@ -333,33 +354,33 @@ export class AgregarUsuarioComponent {
 
 
 
-    constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private invitacionService: InvitacionService, private correoService: CorreoService, private loadingService: LoadingService) {
 
-      this.UserGroup = this.fb.group({
-        id_persona: ['', Validators.required],
-        nombre: ['', Validators.required],
-        apellido_pat: ['', Validators.required],
-        apellido_mat: ['', Validators.required],
-        tipo_usuario: ['', Validators.required],
-        id_lote: ['', Validators.required],
-        telefono: ['', Validators.required],
-        fecha_nacimiento: ['', Validators.required],
-        correo: ['', Validators.required],
-        contrasenia: ['', Validators.required],
-        confirmarContrasena: ['', Validators.required],
-        id_fraccionamiento: ['', Validators.required],
     
-      })
-    
-      this.UserGroup1 = this.fb.group({
-        id_persona: ['', Validators.required],
-        nombre: ['', Validators.required],
-        apellido_pat: ['', Validators.required],
-        apellido_mat: ['', Validators.required],
-        telefono: ['', Validators.required],
-        fecha_nacimiento: ['', Validators.required],
-      })
-    }
+  seleccionar(usuario: any, nombre: any, apellido_pat: any, apellido_mat: any, telefono: any, tipo_usuario: any){
+    this.id_usuario = usuario;
+/*
+    this.UserGroup1 = this.fb.group({
+      id_persona: [usuario, Validators.required],
+      nombre: [nombre, Validators.required],
+      apellido_pat: [apellido_pat, Validators.required],
+      apellido_mat: [apellido_mat, Validators.required],
+      telefono: [telefono, Validators.required],
+      fecha_nacimiento: ['', Validators.required],
+      tipo_usuario: [tipo_usuario, Validators.required] 
+    })*/
+
+      this.UserGroup1.patchValue({
+        id_persona: usuario,
+        nombre: nombre,
+        apellido_pat: apellido_pat,
+        apellido_mat: apellido_mat,
+        telefono: telefono,
+        fecha_nacimiento: '', // o la fecha que necesites
+        tipo_usuario: tipo_usuario // Asegúrate de que este valor sea válido
+      });
+
+  }
+
 
     onEventUsuario(event: any){
       this.tipo_usuario = event.target.value;

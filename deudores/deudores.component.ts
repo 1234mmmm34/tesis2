@@ -91,9 +91,8 @@ export class DeudoresComponent {
 
     this.loadingService.show();
 
-    this.personasService.consultarDeudores(this.dataService.obtener_usuario(3)).subscribe(
+    this.personasService.consultarDeudores(this.dataService.obtener_usuario(3), 0).subscribe(
       (deudasUsuario: Deudores[]) => {
-
 
        this.Deudores_totales = deudasUsuario
        this.indice=0;

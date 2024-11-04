@@ -135,16 +135,16 @@
         <p>
           <input type="text" placeholder="direccion" id="direccion" name="direccion"
             [(ngModel)]="proveedorModel.direccion" required>
-        </p>
+        </p> 
         <p>
           <input type="text" placeholder="Función" id="funcion" name="funcion" [(ngModel)]="proveedorModel.funcion"
             required>
         </p>
 
-        <div style="padding-right: 340px; display: flex;">
+        <div style="padding-right: 340px; display: flex; margin-left: 80px;">
           <button type="submit" class="boton" style="min-width: 100px;">Agregar</button>
           <button (click)="actualizarProveedor(proveedorModel)" type="button" class="boton"
-            style="min-width: 100px;">Actualizar</button>
+            style="min-width: 100px; margin-left: 20px;">Actualizar</button>
         </div>
 
       </form>

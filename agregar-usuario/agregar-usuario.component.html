@@ -61,7 +61,7 @@
             <td>{{usuario.tipo_usuario}}</td>
             <td class="correo">{{usuario.correo}}</td>
             <th>{{usuario.hikvision}}</th>
-            <th><label for="modal_acciones" (click)="seleccionar(usuario.id_persona, usuario.nombre, usuario.apellido_pat, usuario.apellido_mat, usuario.telefono)"><mat-icon
+            <th><label for="modal_acciones" (click)="seleccionar(usuario.id_persona, usuario.nombre, usuario.apellido_pat, usuario.apellido_mat, usuario.telefono, usuario.tipo_usuario)"><mat-icon
                   style="font-size:medium; margin-left: 30px;">visibility</mat-icon></label></th>
 
  
@@ -280,11 +280,11 @@
         </p>
 
         
-        <select class="textb" style="height: 20px;" [(ngModel)]="usuario.tipo_usuario" formControlName="tipo_usuario" name="tipo_usuario" (change)="onEventUsuario($event)">
-          <option [ngValue]=null disabled selected>-- Permisos de usuario --</option>
+        <select class="textb" style="height: 20px;" [(ngModel)]="usuario.tipo_usuario" (change)="onEventUsuario($event)">
+          <option value="null" disabled selected>-- Permisos de usuario --</option>
           <option value="usuario">usuario</option>
           <option value="tesorero">tesorero</option>
-      </select>
+        </select>
 
         <p>
           <label id="agregar" (click)="actualizar_usuario(UserGroup1.value)">Modificar</label>

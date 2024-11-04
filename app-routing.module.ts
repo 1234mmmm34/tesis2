@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { FraccionamientosComponent } from './fraccionamientos/fraccionamientos.component';
 //import { AcuerdosComponent } from './acuerdos/acuerdos.component';
 //import { NotificacionesComponent } from './notificaciones/notificaciones.component';
@@ -34,6 +34,8 @@ import { ConsultarNotificacionesComponent } from './consultar-notificaciones/con
 import { ConsultarAcuerdosComponent } from './consultar-acuerdos/consultar-acuerdos.component'
 import { InquilinosComponent } from './inquilinos/inquilinos.component'
 import { ConsultarDeudasComponent } from './consultar-deudas/consultar-deudas.component';
+import { PaypalComponent } from './paypal/paypal.component';
+
 
 import { InvitacionComponent } from './invitacion/invitacion.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
@@ -49,7 +51,7 @@ import { HomeUsuariosComponent } from './home-usuarios/home-usuarios.component'
 import { PaseTemporalComponent } from './pase-temporal/pase-temporal.component';
 
 const routes: Routes = [
-  // {path:'Home', component:HomeComponent},
+   {path:'Home', component:HomeComponent},
   //{path:'Acuerdos', component:AcuerdosComponent},
   //{path:'Notificaciones', component:NotificacionesComponent},
   { path: 'ConsultarNotificaciones', component: ConsultarNotificacionesComponent },
@@ -68,6 +70,8 @@ const routes: Routes = [
   { path: 'ConsultarUsuario', component: EmailComponent },
   { path: 'ConsultarPropiedades', component: ConsultarPropiedadesComponent },
   { path: 'Settings', component: CuentaComponent },
+  { path: 'Paypal', component: PaypalComponent },
+
 
   { path: 'Invitacion', component: InvitacionComponent },
   { path: 'Recuperacion', component: RecuperacionContraseniaComponent },
@@ -82,7 +86,7 @@ const routes: Routes = [
   {
     path: 'PanelAdmin', component: PanelPrincipalAdminComponent,
     children: [
-     // { path: 'Home', component: HomeComponent },
+      { path: 'Home', component: HomeComponent },
       //{path:'PanelAdmin', component:PanelPrincipalAdminComponent},
       //  {path:'Acuerdos', component:AcuerdosComponent},
       // {path:'Notificaciones', component:NotificacionesComponent},
@@ -110,12 +114,13 @@ const routes: Routes = [
         {path:'AgregarUsuario', component:AgregarUsuarioComponent}
       ]},
       */
-      {
+      { 
         path: "Configuracion", component: CuentaComponent
         , children: [
           { path: "", component: EditarCuentaComponent },
           { path: "Grupos", component: GruposComponent },
-          { path: "EditarCuenta", component: EditarCuentaComponent }
+          { path: "EditarCuenta", component: EditarCuentaComponent },
+          { path: 'Paypal', component: PaypalComponent }
         ]
       }]
   },//Final panel admin
@@ -149,7 +154,8 @@ const routes: Routes = [
         children: [
           { path: "", component: EditarCuentaComponent },
           { path: "Grupos", component: GruposComponent },
-          { path: "EditarCuenta", component: EditarCuentaComponent }
+          { path: "EditarCuenta", component: EditarCuentaComponent },
+          { path: 'Paypal', component: PaypalComponent }
         ]
       }
     ]

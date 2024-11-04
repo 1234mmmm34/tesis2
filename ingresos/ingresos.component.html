@@ -49,8 +49,7 @@
           <tr>
             <th>#</th>
             <th>Deudor</th>
-            <th>Tipo de deuda</th>
-            <th class="fecha">Descripción</th>
+            <th class="fecha" style="width: 350px;">Descripción</th>
             <th>Monto</th>
             <th>Recargo aplicado</th>
             <th>Estado</th>
@@ -64,7 +63,6 @@
             (click)="onRowClicked(deuda)">
             <th scope="row">{{hist.id_deuda}}</th>
             <td>{{hist.nombre_persona}}</td>
-            <td>{{hist.tipo_deuda}}</td>
             <td class="fecha">{{hist.nombre_deuda}}</td>
             <td>${{hist.monto}} MXN</td>
             <td>${{hist.recargo}} MXN</td>
