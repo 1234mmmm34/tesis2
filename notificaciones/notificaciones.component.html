@@ -1,0 +1,64 @@
+
+
+<body>
+
+<h2 class="titulo">Notificaciones</h2>
+<p>las notificaciones son una herramienta clave para mantener a una comunidad informada, comprometida y cohesionada. </p>
+
+<hr>
+
+    <div class="contenedor"> 
+       <div class="form"> 
+           
+            <!-- Formulario para agregar un nuevo acuerdo -->
+            <form id="formCrear" class="Formulario" #form="ngForm" (ngSubmit)="agregarNotificacion(form.value)" >
+                <!-- ... Otros campos del formulario ... -->
+
+                <div class="form-group">
+                    <select id="tipo" name="tipo" required ngModel>
+                        <option value="general" disabled>-- tipo de notificación --</option>
+                        <option value="general" >General</option>
+                        <option value="individual" >Individual</option>
+                    </select>
+                </div>
+    
+     
+     
+    
+                <div class="form-group">
+                    <select id="destinatario" name="destinatario"  required ngModel> 
+                        <option [ngValue]="undefined" [disabled]="true">-- Selecciona un destinatario --</option>
+                        <option value={{usuario.id_persona}} *ngFor="let usuario of personas">
+                            {{usuario.id_persona}}- {{usuario.nombre}} {{usuario.apellido_pat}} {{usuario.apellido_mat}}
+                        </option>
+                    </select>
+                </div>
+    
+    
+                <div class="form-group">
+                    <input type="text" id="asunto" name="asunto" placeholder="asunto"  required ngModel>
+                </div>
+    
+    
+                <div class="form-group">
+                    <textarea id="mensaje" name="mensaje"  placeholder="mensaje"  required ngModel></textarea>
+                </div>
+    
+            <!--
+                <div class="form-group">
+                    <label for="id_notificacion">ID de Notificación:</label>
+                    <input type="number" id="id_notificacion" name="id_notificacion" [(ngModel)]="idNotificacion">
+                </div>
+    
+    -->
+                <div class="botones-container">
+                    <button class="boton-verde" type="submit">Agregar</button>
+                  </div>
+            </form>
+        </div>
+     <!--
+    
+            -->
+        </div>
+        
+    </body>

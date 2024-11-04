@@ -1,0 +1,177 @@
+body{
+  background-color: #f2f3f4; 
+  margin: 0%;
+  background-position: center center;
+
+}
+
+.titulo, p {
+  text-align:justify !important;
+  padding-top: 5 px;
+  margin-left: 100px;
+  color: rgb(97, 94, 94) !important;
+  
+}  
+
+hr {
+  height: 10px;
+  border: 0;
+  box-shadow: 0 10px 10px -10px #a7a4a4 inset;
+}
+
+
+#buscar{
+  position:absolute; 
+  top:35px; left: 500px;  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.25rem;
+  background-color: #f2f7f0;
+}
+
+.contenedor { 
+  width: 10%;
+  margin-left: 37%;
+  height: 70%;
+  padding: 20px;
+
+}
+  
+  input{
+    border:none;
+    text-align: center;
+
+    width: 300px;
+    border-bottom:1px solid #757575;
+    background-color: #f2f7f0;
+  }
+  
+  .titulo {
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }    
+  
+  .form {
+
+    /* 
+    display: flex;
+  flex-direction: column;
+
+        display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1.25rem;
+    */
+    width: 500px;
+    display: flex;
+  flex-direction: column;
+    margin-top: 40px;
+
+   
+  }
+  
+  .Formulario{
+ /*   display: flex;
+    flex-direction: column;
+
+        display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1.25rem;
+   */
+
+   width: 500px;
+   display: grid;
+
+   grid-gap: 1.25rem;
+
+    display: flex;
+    flex-direction: column;
+    margin-right: 60%;
+  }
+  
+  select, textarea{
+    text-align: center;
+    width: 300px;
+
+    outline: none;
+    border: none;
+    background-color: #f2f7f0;
+    border-bottom: 1px solid #989898;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea{
+    height: 100px;
+  }
+ 
+
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    background-color: #242434;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 14px;
+    text-transform: uppercase;
+    border-color: #242434;
+    
+
+  }
+
+.boton-verde:hover, .boton-amarillo:hover, .boton-rojo:hover, .boton-azul:hover {
+color: #ffffff;
+background-color: #6c5bb8;
+border-color: #6c5bb8;
+}
+
+
+  .botones-container{
+ 
+    display: flex;
+    flex-direction: column;
+    margin-left: 12%;
+    padding-right: 55%;
+  
+  }
+    
+  
+  /*
+  label {
+    margin-top: 10px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  */
+
+  
+  .boton-azul {
+    background-color: blue; /* Azul */
+    color: white;
+  }
+  
+  
+  table, th ,td, thead, tr {
+    text-align: center;
+    width: 300px; 
+  
+  }
+  
+  table{
+    position:absolute; top:10px;
+    width: 610px;
+  }
+  

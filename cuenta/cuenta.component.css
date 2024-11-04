@@ -1,0 +1,167 @@
+body{
+  background-color: #f2f7f0;
+  margin: 0%;
+  background-position: center center;
+
+}
+
+.derecha{
+ 
+  background: linear-gradient(rgb(123, 141, 118),rgb(91, 107, 87), rgb(116, 134, 110));
+  display: flex;
+  flex-direction: column;
+  width: 20.5%;
+  height: 387px; 
+  position:absolute;
+  padding-top: 40px;
+  margin-left: 27%;
+  padding: 20px;
+  color: rgb(255, 255, 255);
+  
+}
+
+.contenedor{
+  padding-top: 20px;
+}
+
+.mat-toolbar{
+  /*  background-color: #768650;  */
+   background-color: #575d43; 
+  }
+
+  .titulo {
+    
+    color: rgb(0, 0, 0);
+    margin-top: 30px;
+
+    margin-left: 8%;
+    margin-right: 32%;
+    text-align: left;
+
+  }
+    
+  
+  input, select{
+    width: 300px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    border-bottom: 1px solid #989898;
+  }
+
+  p > #telefono, p > #fechaNacimiento{
+    width: 300px; 
+    border: 1px solid transparent;
+    background-color: transparent;
+    border-bottom: 1px solid #989898;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+   
+  }
+  
+
+  .form {
+    display: block;
+    flex-direction: column;
+ 
+  }
+  
+  .Formulario{
+    display: block;
+    flex-direction: column;
+
+   
+  }
+  
+
+
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4c9c4e;
+    color: #FFFFFF;
+  }
+
+  .boton-verde:hover {
+    background: #317435;
+  }
+  
+
+  .botones-container {
+      display: flex;
+    
+  }
+  
+  table, th ,td, thead, tr {
+    text-align: center;
+    width: 300px; 
+  
+  }
+  
+
+  .Formulario {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+    margin-right: 13%;
+    padding-left: 20px;
+
+    border-radius: 0% 2% 2% 0%;
+    
+  }
+  
+  select, #fechaNacimiento{
+    width: 180px;
+    height: 26px;
+  }
+  
+  
+  #telefono{
+    width: 210px;
+    height: 26px;
+  }
+  
+  #lote1{
+    display: inline-block;
+  
+  
+  }
+  
+  a {
+    flex-direction: column;
+  }
+
+.imagen{
+position: absolute;
+margin-left: 800px;
+margin-top: -300px;
+}
+
+.btn_imagen{
+padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background: #4c9c4e;
+    color: #FFFFFF;
+
+    position: absolute;
+    margin-left: 840px;
+}
+
+
+
+

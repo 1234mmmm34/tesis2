@@ -1,0 +1,58 @@
+<body>
+    <div class="contenedor">
+
+        <div class="form">
+            <h2 class="titulo" style="margin-left: 90px;">Tesorero</h2>
+
+            <form id="formCrear" class="Formulario" #form="ngForm" [formGroup]="UserGroup"
+                style="  position: absolute; left: 90px; top: 112px;">
+                <p style="width: 300px; text-align: center;">Invita al tesorero de la comunidad a formar parte de tu comunidad
+                    en línea</p>
+
+                <p>
+                    <input type="text" formControlName="correo" name="correo" placeholder="Correo electrónico"
+                    style="width: 300px; text-align: center;"    [(ngModel)]="correo_invitado1">
+                </p>
+
+                <div class="botones-container">
+                    <button class="boton-verde"  (click)="agregar_usuario()" onclick="myFunction()">Agregar</button>
+                </div> 
+            </form> 
+        </div> 
+    </div>
+
+
+    <div id="controlador">
+        <h2 class="titulo">Se envió la solicitud al tesorero</h2>
+        <p>
+            Se envió tu solicitud, pronto recibirás una respuesta,
+            consulta el estado de ésta aquí.
+        </p>
+    </div>
+
+    <!--
+            <div id="controlador">
+        <h2 class="titulo">Se envió la solicitud al tesorero</h2>
+        <p>
+            Se envió una solicitud a {{consultarCorreo()}}, pronto recibirás una respuesta,
+            consulta el estado de ésta aquí.
+        </p>
+
+    </div>
+    -->
+
+    <div id="informacion">
+        <h2 class="titulo">Bienvenido al apartado de tesorero</h2>
+        <h2 class="titulo">¿Qué es?</h2>
+        <p>
+            El tesorero es aquel que gestiona la entrada y salida de dinero
+            dentro de la comunidad, tales como ingresos y egresos; a su vez,
+            también es el encargado de manejar las deudas de los arrendatarios
+            y propietarios.
+
+            Para una mejor administración de tu comunidad, agrega un tesorero.
+        </p>
+
+    </div>
+
+</body>

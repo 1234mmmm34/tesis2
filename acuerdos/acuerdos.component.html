@@ -1,0 +1,33 @@
+
+<body>
+    <h2 class="titulo">Acuerdos</h2>
+    <p>promueven la comunicación efectiva, establecen normas compartidas, promueven la responsabilidad y cultivan un sentido de pertenencia. </p>
+
+    <hr>
+
+    <div class="contenedor"> 
+        
+
+            <form id="buscar">
+                <input type="text" name="filtrar" placeholder="buscar" [(ngModel)]="filtroAcuerdos">
+                <input type="date" name="filtrarFecha" [(ngModel)]="filtroFecha" id="buscar1">
+            </form>
+
+            <form #acuerdoForm="ngForm" class="Formulario" (ngSubmit)="agregarAcuerdo(acuerdoForm.value)" [formGroup]="UserGroup">
+
+
+                <input type="text" id="asunto" name="asunto" formControlName="asunto"  placeholder="Asunto del acuerdo" ngModel required>
+
+
+                <textarea id="detalles" name="detalles" rows="4" formControlName="detalles"  placeholder="Detalles del acuerdo" ngModel required></textarea>
+
+                <div class="botones-container">
+                    <button class="boton-verde" type="submit">Agregar</button>
+                </div>
+            </form>
+    </div>
+
+
+
+</body>
+

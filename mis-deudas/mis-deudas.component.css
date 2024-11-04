@@ -1,0 +1,129 @@
+body{
+    background-color: #EDFBE6;
+  }
+  .contenedor {
+      height:380px;
+      width:900px;
+      position:absolute; 
+      overflow:scroll;
+      top: 120px;
+      right:20px;
+      margin-left: 30%;
+      
+    }
+  
+    form{
+      margin-left:50px;
+    }
+  
+    .contenedor1 {
+      width: 70%;
+      margin: auto;
+      height: 92%;
+      padding: 20px; 
+      margin-top: 1px;
+      position:absolute; top:23px; left:20px;
+      margin-left: 10%;
+      margin-bottom: 400px;
+  
+    }
+    
+    input{
+      width: 30%;
+    }
+    .fecha{
+      width: 300px; 
+    }
+  
+  .botones-container{
+      margin: auto;
+  }
+  
+    .titulo {
+      text-align: center;
+      color: rgb(0, 0, 0);
+    }
+    
+    .form {
+      display: flex;
+      flex-direction: column;
+  
+    }
+    
+    .Formulario{
+      display: flex;
+      flex-direction: column;
+     
+    }
+    
+    .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+      padding: 10px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    
+      
+     
+    }
+    
+    .boton-verde {
+      background-color: #4CAF50; /* Verde */
+    
+      
+      color: white;
+    }
+    
+    .boton-azul {
+      background-color: blue; /* Azul */
+      color: white;
+    }
+    
+    
+    table, th ,td, thead, tr {
+      text-align: center;
+      width: 300px; 
+    
+    }
+  
+    
+   /* Estilos para la tabla */
+  /* Estilos para la tabla */
+  #example {
+    text-align: center;
+    width: 97%;
+    margin: auto;
+    border-collapse: collapse; /* Para que los bordes colapsen y se vean continuos */
+    border: none; /* Elimina los bordes predeterminados */
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  #example td,
+  #example th {
+    border-bottom: 1px solid #ccc; /* Línea gris como borde inferior */
+    border-left: none; /* Elimina el borde izquierdo */
+    border-right: none; /* Elimina el borde derecho */
+    background-color: transparent; /* Fondo transparente para las celdas */
+  }
+  
+  
+  /* Estilos para todas las filas */
+  #example tr {
+    background-color: transparent; /* Fondo transparente para todas las filas */
+  }
+  
+  /* Estilos para el borde inferior */
+  #example tr td,
+  #example tr th {
+    border-bottom: 2px solid black; /* Línea gris más gruesa como borde inferior */
+  }
+  
+  /* Evitar que el borde inferior se muestre en la última fila */
+  #example tr:last-child td,
+  #example tr:last-child th {
+    border-bottom: none; /* Para la última fila, eliminar el borde inferior */
+  }
+  
+  
+  
+  

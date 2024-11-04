@@ -1,0 +1,130 @@
+body{
+  background-color: #f2f3f4; 
+  margin: 0%;
+  background-position: center center;
+
+}
+
+.contenedor{
+  position: absolute;
+  top: 200px;
+  left: 20%;
+}
+
+#buscar{
+ 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.25rem;
+  background-color: #f2f7f0;
+  padding-left: 65px;
+  padding-bottom: 40px;
+  
+}
+
+
+.Formulario{
+
+
+  width: 500px;
+  display: grid;
+
+  grid-gap: 1.25rem;
+
+   display: flex;
+   flex-direction: column;
+   margin-right: 60%; 
+   margin-top: 5%;
+   margin-left: 35%;
+ }
+ 
+
+  input{
+    border:none;
+    text-align: center;
+    width: 300px;
+    border-bottom:1px solid #757575;
+    background-color: #f2f7f0;
+  }
+  
+  .titulo, p {
+    text-align:justify;
+    padding-top: 5 px;
+    margin-left: 100px;
+    color: rgb(97, 94, 94);
+    
+  }    
+  
+  hr {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #a7a4a4 inset;
+  }
+
+
+  select, textarea{
+    text-align: center;
+    width: 300px;
+
+    outline: none;
+    border: none;
+    background-color: #f2f7f0;
+    border-bottom: 1px solid #989898;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea{
+    height: 100px;
+  }
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    background-color: #242434;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 14px;
+    text-transform: uppercase;
+    border-color: #242434;
+    
+
+  }
+
+.boton-verde:hover, .boton-amarillo:hover, .boton-rojo:hover, .boton-azul:hover {
+color: #ffffff;
+background-color: #6c5bb8;
+border-color: #6c5bb8;
+}
+
+.botones-container{
+ 
+  display: flex;
+  flex-direction: column;
+  margin-left: 12%;
+  padding-right: 55%;
+
+
+}
+  
+
+
+  .boton-azul {
+    background-color: blue; /* Azul */
+    color: white;
+  }
+  
+  
+  table, th ,td, thead, tr {
+    text-align: center;
+    width: 300px; 
+  
+  }
+  
+  table{
+    position:absolute; top:10px;
+    width: 610px;
+  }
+  

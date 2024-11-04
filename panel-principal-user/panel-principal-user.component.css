@@ -1,0 +1,221 @@
+body{
+  background-color: #ccdfc3; 
+}
+
+
+.example-container {
+  display: flex;
+ 
+  flex-direction: column;
+position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+ 
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+
+} 
+
+.mat-drawer-inner-container { overflow: hidden; }
+
+
+
+.configuracion{
+  margin-top: 40px;
+/*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.20); */
+background-color: rgb(149, 150, 193, 1);
+}
+
+img{
+  color: aliceblue;
+}
+.mat-toolbar{
+  /*  background-color: #768650;  */
+  /* background-color: #575d43; */
+  background-color: #c1bffc;
+
+
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+
+
+
+
+
+
+  }
+
+
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  z-index: 2;
+
+
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+}
+
+a{
+  margin-left: auto;
+  margin-right: 2%;
+
+}
+
+a>h6{
+
+  
+  margin-right: 4%;
+  font-size: 15px;
+
+
+}
+
+button{
+  margin-bottom: 10px;
+  padding: 0%;
+}
+
+a h2.example-app-name {
+ /* margin-left: auto; */
+  color: rgb(4, 8, 69);
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+
+}
+
+a h6{
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgb(4, 8, 69);
+  line-height: 2%;
+
+  
+}
+
+
+#usuario{
+  padding-top: 10px;
+  margin-right: 2%;
+  margin-bottom: 5px;
+  
+}
+
+ 
+
+
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. 
+      flex: 1;
+     */ 
+
+     flex: 1;
+
+
+ /* background-color: #edfbe6; */
+/* background: linear-gradient(rgb(201, 231, 201),rgb(241, 241, 241), rgb(255, 255, 255)); */
+
+
+  
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts.
+      flex: 1 0 auto; 
+     */
+ 
+     flex: 1 0 auto;
+
+}
+
+
+
+mat-sidenav{
+  width: 250px;
+
+  background: linear-gradient(rgb(149, 150, 193, 1),rgb(152, 152, 190), rgb(160, 161, 197));
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+}
+
+
+
+.opciones{
+  color: rgb(0, 0, 0);
+  padding-left: 50px;
+  padding-top: 16px;
+  
+}
+
+p{
+  font-size: 15px;
+  color: black;
+ 
+  
+}
+
+
+
+#logo{
+  height: 55px;
+  width: 130px; 
+
+}
+
+#logo1{
+  height: 94px;
+  width: 110px; 
+}
+
+
+mat-expansion-panel{
+  background-color: rgb(149, 150, 193, 1); 
+  border-style: none;
+  box-shadow: none;
+
+
+}
+
+mat-expansion-panel-header{
+  background-color: rgb(149, 150, 193, 1); 
+  border-style: none;
+  box-shadow: none;
+  box-shadow: rgb(38, 40, 177);
+
+
+}
+ 
+mat-icon{ 
+  
+  position: absolute;
+  left: 10px;
+  font-size: 20px;
+}
+
+
+
+mat-panel-title, mat-nav-list, a, mat-expansion-panel-header, mat-sidenav-container{
+ 
+  font: 1em sans-serif;
+  text-decoration: none;
+
+}
+
+ a:hover{
+ 
+  text-decoration: none;
+
+}
+
+
+#salir{
+  padding-left: 50px;
+  margin-top: 40px;
+}
+
+
+
+

@@ -1,0 +1,264 @@
+/*
+body{
+    background-color: #f2f7f0;
+  }
+  .contenedor {
+    width: 30%;
+    margin: auto;
+    height: 70%;
+    padding: 20px;
+    margin-top: 20px;
+    position:absolute; top:23px; left:10px;
+    margin-left: 5%;
+  }
+  
+  
+  .titulo {
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  
+   
+  }
+  
+  .Formulario{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.20rem;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    
+   
+  }
+  
+  /*
+  label {
+    margin-top: 10px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  */
+  .boton-verde {
+    background-color: #4CAF50; /* Verde */
+  
+    
+    color: white;
+  }
+  
+  .boton-azul {
+    background-color: blue; /* Azul */
+    color: white;
+  }
+  
+  
+  table, th ,td, thead, tr {
+    text-align: center;
+    width: 300px; 
+  
+  }
+  
+  table{
+    position:absolute; top:23px; left:550px;
+    width: 610px;
+  }
+  
+  .botones-container{
+    margin: auto;
+  }
+  
+  input{
+    border:none;
+    border-bottom:1px solid #757575;
+    background-color: transparent;
+  }
+  
+  #controlador{
+    margin-top: 20px;
+    position:absolute; top:40px; left:550px;
+    width: 610px;
+    border: #757575;
+  } 
+  
+  #controlador > form > input,  #controlador > form > label{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  #informacion{
+    margin-top: 20px;
+    position:absolute; top:40px; left:550px; right: 10px;
+    background-color: transparent;
+  }
+  
+  #informacion > form > input,  #informacion > form > label{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: transparent;
+  }
+  
+  
+  /*
+  #informacion {
+    display: none;
+  }
+  */
+
+
+
+
+
+
+  body{
+    background-color: #f2f7f0;
+  }
+  .contenedor {
+    width: 30%;
+    margin: auto;
+    height: 70%;
+    padding: 20px;
+    margin-top: 20px;
+    position:absolute; top:23px; left:10px;
+    margin-left: 5%;
+  }
+  
+  
+  .titulo {
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  
+   
+  }
+  
+  .Formulario{
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.20rem;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    
+   
+  }
+  
+  /*
+  label {
+    margin-top: 10px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .boton-verde, .boton-amarillo, .boton-rojo, .boton-azul{
+    padding: 10px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  */
+  .boton-verde {
+    background-color: #4CAF50; /* Verde */
+  
+    
+    color: white;
+  }
+  
+  .boton-azul {
+    background-color: blue; /* Azul */
+    color: white;
+  }
+  
+  
+  table, th ,td, thead, tr {
+    text-align: center;
+    width: 300px; 
+  
+  }
+  
+  table{
+    position:absolute; top:23px; left:550px;
+    width: 610px;
+  }
+  
+  .botones-container{
+    margin: auto;
+  }
+  
+  input{
+    border:none;
+    border-bottom:1px solid #757575;
+    background-color: transparent;
+  }
+  
+  #controlador{
+    margin-top: 20px;
+    position:absolute; top:40px; left:550px;
+    width: 610px;
+    border: #757575;
+  } 
+  
+  #controlador > form > input,  #controlador > form > label{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  #informacion{
+    margin-top: 20px;
+    position:absolute; top:40px; left:550px; right: 10px;
+    background-color: transparent;
+  }
+  
+  #informacion > form > input,  #informacion > form > label{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    background-color: transparent;
+  }
+  
+  /*
+  #informacion {
+    display: none;
+  }
+  */
