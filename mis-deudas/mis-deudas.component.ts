@@ -30,7 +30,7 @@ export class MisDeudasComponent {
 
   ngOnInit(){
     //this.fetchDataDeudores();
-    this.ConsultarDeudores(0);
+    this.ConsultarDeudores();
   }
 
   constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder,private personasService:PersonasService, private loadingService: LoadingService){}
@@ -77,17 +77,20 @@ export class MisDeudasComponent {
 
     const selectedValue = event.target.value;
 
-    console.log(selectedValue )
+    if(selectedValue=="1"){
+      this.ConsultarDeudasPagadas();
+    }
+    else{
+      this.ConsultarDeudores();
+    }
     //this.id_destinatario = selectedValue;
     // console.log(this.id_destinatario);
 
-    this.ConsultarDeudores(selectedValue);
   }
 
 
-  ConsultarDeudores(tipo_deuda: number){
+  ConsultarDeudores(){
     this.loadingService.show();
-    console.log("aaaaaaaa: " + this.dataService.obtener_usuario(4))
     this.personasService.consultarDeudores(this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(1)).subscribe(
       (deudasUsuario: Deudores[]) => {
         this.loadingService.hide();
@@ -99,11 +102,39 @@ export class MisDeudasComponent {
        this.verdaderoRango = 6;
        this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
 
-
-        console.log('deudas', this.Deudores_totales);
         if(this.Deudores_totales.length==0){
           Swal.fire({
-            title: 'El usuario seleccionado no tiene deudas  vencidas',
+            title: 'El usuario seleccionado no tiene deudas atrasadas',
+            text: '',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      },
+      (error) => {
+        // Manejo de errores
+        console.error('Error:', error);
+      }
+    );
+  }
+
+   
+  ConsultarDeudasPagadas(){
+    this.loadingService.show();
+    this.personasService.Consultar_DeudasPagadas(this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(1)).subscribe(
+      (deudasUsuario: Deudores[]) => {
+        this.loadingService.hide();
+        this.mostrarGrid = true;
+
+       this.Deudores_totales = deudasUsuario
+       this.indice = 0;
+       this.cont = 1;
+       this.verdaderoRango = 6;
+       this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
+
+        if(this.Deudores_totales.length==0){
+          Swal.fire({
+            title: 'El usuario seleccionado no tiene historial de deudas pagadas',
             text: '',
             icon: 'warning',
             confirmButtonText: 'Aceptar'
@@ -151,7 +182,7 @@ export class MisDeudasComponent {
     }
     else{
       total = monto;
-      
+
 
     }
     return isNaN(total) ? 0 : parseFloat(total.toFixed(2));

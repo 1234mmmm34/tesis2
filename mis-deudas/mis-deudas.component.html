@@ -61,17 +61,17 @@
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ deudor.tipo_deuda }}</td>
                         <td>{{ deudor.nombre_deuda }}</td>
-                        <td>${{ deudor.monto }} MXN</td>
-                        <td class="fecha">{{ formatearFecha(deudor.proximo_pago) }}</td>
+                        <td>${{ deudor.monto_restante }} MXN</td>
+                        <td class="fecha">{{ deudor.proximo_pago | date:'dd/MM/yyyy' }}</td>
                         <td>
-                            {{calcularProximoPago(deudor.proximo_pago,deudor.periodicidad)}}
+                            {{calcularProximoPago(deudor.proximo_pago,deudor.periodicidad) | date:'dd/MM/yyyy'}}
                         </td>
                         <td>{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
                         <td [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
                             {{ calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) }}
                           </td>
-                        <td>{{deudor.recargo === 0 ? '-' : '$'+deudor.recargo+' MXN'}}</td>
-                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad), deudor.monto, deudor.recargo)}} MXN</td>
+                        <td>{{calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) === 0 ? '-' : '$'+deudor.recargo+' MXN'}}</td>
+                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad), deudor.monto_restante, deudor.recargo)}} MXN</td>
                         <td style="padding-left: 4%;"> <mat-icon style="font-size:medium;"  for="modal">visibility</mat-icon> </td>
                     </tr> 
                 </tbody>
