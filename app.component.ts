@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import * as $ from "jquery";
-import { sesion, sesions } from "../app/modelos/usuarios"
+import { sesion, sesions } from "./modelos/usuarios"
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs'

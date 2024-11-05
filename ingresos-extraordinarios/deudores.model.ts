@@ -13,6 +13,7 @@ export class Deudores {
         periodicidad:number;
         monto_restante: number;
         subdeuda: number;
+        periodo: number;
         constructor( 
             id_deudor: number,
             id_deuda: number,
@@ -27,7 +28,8 @@ export class Deudores {
             estado:string,
             periodicidad:number,
             monto_restante: number,
-            subdeuda: number)
+            subdeuda: number,
+            periodo: number)
             {
             this.id_deudor=id_deudor,
             this.id_deuda=id_deuda,
@@ -42,7 +44,8 @@ export class Deudores {
             this.estado=estado,
             this.periodicidad=periodicidad,
             this.monto_restante=monto_restante,
-            this.subdeuda = subdeuda
+            this.subdeuda = subdeuda,
+            this.periodo = periodo
     
             }
     }

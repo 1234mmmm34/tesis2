@@ -27,6 +27,7 @@ export class MisDeudasComponent {
   Deudores_totales:Deudores[]=[];
   Deudores_totales2:Deudores[]=[];
   mostrarGrid: boolean = false;
+  selectedValue: any;
 
   ngOnInit(){
     //this.fetchDataDeudores();
@@ -75,9 +76,9 @@ export class MisDeudasComponent {
 
   onChange(event: any) {
 
-    const selectedValue = event.target.value;
+    this.selectedValue = event.target.value;
 
-    if(selectedValue=="1"){
+    if(this.selectedValue=="1"){
       this.ConsultarDeudasPagadas();
     }
     else{
@@ -188,6 +189,7 @@ export class MisDeudasComponent {
     return isNaN(total) ? 0 : parseFloat(total.toFixed(2));
   }
 
+  /*
   calcularProximoPago(proximoPago: string,periodicidad:number)
   {
     const proximoPago_ = new Date(proximoPago); // Convertir a objeto Date
@@ -195,7 +197,7 @@ export class MisDeudasComponent {
     proximoPago = formatDate(proximoPago_, 'yyyy-MM-dd', 'en-US');
     return proximoPago;
   }
-
+ */
   formatearFecha(fechaPago:string){
     return fechaPago=formatDate(fechaPago, 'yyyy-MM-dd', 'en-US');
   }

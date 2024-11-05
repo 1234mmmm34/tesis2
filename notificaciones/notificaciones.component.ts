@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Personas } from './personas.model'; 
 import { DataService } from '../data.service';
 import { PersonasService } from './personas.service';
-import { NotificacionesService } from '../notificaciones/notificaciones.service';
+import { NotificacionesService } from './notificaciones.service';
 import { Notificaciones } from './notificaciones.model';
 import { usuario, usuarios } from "../modelos/usuarios";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'

@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { fraccionamientos, controladores } from '../app/modelos/fraccionamientos';
-import { sesion, sesions, usuarios } from '../app/modelos/usuarios'
-import { deudas, deuda, deudores, graficas, entradas, historial } from "../app/modelos/deudas"
-import { lotes } from '../app/modelos/propiedades';
-import { inquilinos } from '../app/modelos/inquilinos';
+import { fraccionamientos, controladores } from './modelos/fraccionamientos';
+import { sesion, sesions, usuarios } from './modelos/usuarios'
+import { deudas, deuda, deudores, graficas, entradas, historial } from "./modelos/deudas"
+import { lotes } from './modelos/propiedades';
+import { inquilinos } from './modelos/inquilinos';
 import { formatDate } from '@angular/common';
 import { Personas } from './modelos/personas';
 //import { PersonasService } from './consultar-notificaciones/notificaciones.service';

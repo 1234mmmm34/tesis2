@@ -46,10 +46,9 @@
                         <th>Tipo de Deuda</th>
                         <th>Nombre de Deuda</th>
                         <th>Monto</th>
-                        <th>ultimo pago</th>
-                        <th>próxima fecha de pago</th>
-                        <th>Periodicidad</th>
-                        <th>Retraso (dias)</th>
+                        <th *ngIf="selectedValue=='1'">Fecha de pago</th>
+                        <th *ngIf="selectedValue=='2'">Periodicidad</th>
+                        <th *ngIf="selectedValue=='2'">Retraso (dias)</th>
                         <th>Recargo</th>
                         <th>Total</th> 
                         <th>Acciones y ver más</th>
@@ -62,12 +61,11 @@
                         <td>{{ deudor.tipo_deuda }}</td>
                         <td>{{ deudor.nombre_deuda }}</td>
                         <td>${{ deudor.monto_restante }} MXN</td>
-                        <td class="fecha">{{ deudor.proximo_pago | date:'dd/MM/yyyy' }}</td>
-                        <td>
-                            {{calcularProximoPago(deudor.proximo_pago,deudor.periodicidad) | date:'dd/MM/yyyy'}}
+                        <td *ngIf="selectedValue=='1'">
+                          {{  deudor.periodo | date:'dd/MM/yyyy'}}
                         </td>
-                        <td>{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
-                        <td [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
+                        <td *ngIf="selectedValue=='2'">{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
+                        <td *ngIf="selectedValue=='2'" [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
                             {{ calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) }}
                           </td>
                         <td>{{calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) === 0 ? '-' : '$'+deudor.recargo+' MXN'}}</td>
