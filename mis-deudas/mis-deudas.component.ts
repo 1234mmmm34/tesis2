@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Deudores } from '../ingresos-extraordinarios/deudores.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { DataService } from '../data.service';
 import { FormBuilder } from '@angular/forms';
 import { PersonasService } from '../ingresos-extraordinarios/personas.service';
-import {  deudores, deudor } from "../modelos/deudas"
+import { deudores, deudor } from "../modelos/deudas"
 import { formatDate } from '@angular/common';
 import Swal from 'sweetalert2';
 import { LoadingService } from '../loading-spinner/loading-spinner.service';
@@ -17,24 +17,27 @@ export class MisDeudasComponent {
 
   httpclient: any;
   deudores: deudores[] = [];
-  deudor =new deudor();
-  filtroDeudores:'' | undefined;
-  filtroFecha:'' | undefined;
+  deudor = new deudor();
+  filtroDeudores: '' | undefined;
+  filtroFecha: '' | undefined;
   indice: number = 0;
   cont: number = 1;
   verdaderoRango: number = 6;
 
-  Deudores_totales:Deudores[]=[];
-  Deudores_totales2:Deudores[]=[];
+  Deudores_totales: Deudores[] = [];
+  Deudores_totales2: Deudores[] = [];
   mostrarGrid: boolean = false;
   selectedValue: any;
+  total: number = 0;
+  producto: string = '';
 
-  ngOnInit(){
+
+  ngOnInit() {
     //this.fetchDataDeudores();
     this.ConsultarDeudores();
   }
 
-  constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder,private personasService:PersonasService, private loadingService: LoadingService){}
+  constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private personasService: PersonasService, private loadingService: LoadingService) { }
 
   // fetchDataDeudores() {
   //   this.dataService.fetchDataDeudores(this.dataService.obtener_usuario(3)).subscribe((deudores: deudores[]) => {
@@ -54,6 +57,46 @@ export class MisDeudasComponent {
       this.paginador_atras();
     }
   }
+
+
+
+  createPayment() {
+    // URL base del servidor Node.js
+    const baseUrl = 'http://localhost:3000';
+
+     console.log(this.total)
+
+    // Configuración de parámetros
+    let params = new HttpParams().set('price', (this.total).toString()).set('client_key', this.dataService.obtener_usuario(13))
+      .set('secret_key', this.dataService.obtener_usuario(14)).set('product',  this.producto ).set('id_deuda', "13");
+
+    // Realizar la solicitud GET
+   
+    this.http.get<string>(`${baseUrl}/pay`, { params }).subscribe(
+      (approvalUrl: string) => {
+        console.log('Approval URL:', approvalUrl);
+        // Redirige al usuario a la URL de aprobación de PayPal
+        window.location.href = approvalUrl;
+        this.total = 0;
+        this.producto = '';
+      },
+      (error) => {
+        console.error('Error creating PayPal payment:', error);
+      }
+    );
+ 
+  }
+
+
+  pagar(deudor: any){
+    console.log(deudor)
+    this.producto = deudor.nombre_deuda;
+
+    this.total = deudor.monto_pendiente + deudor.recargo;
+
+ // return isNaN(this.total) ? 0 : parseFloat(this.total.toFixed(2));
+}
+
 
   paginador_atras() {
 
@@ -78,10 +121,10 @@ export class MisDeudasComponent {
 
     this.selectedValue = event.target.value;
 
-    if(this.selectedValue=="1"){
+    if (this.selectedValue == "1") {
       this.ConsultarDeudasPagadas();
     }
-    else{
+    else {
       this.ConsultarDeudores();
     }
     //this.id_destinatario = selectedValue;
@@ -90,20 +133,20 @@ export class MisDeudasComponent {
   }
 
 
-  ConsultarDeudores(){
+  ConsultarDeudores() {
     this.loadingService.show();
     this.personasService.consultarDeudores(this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(1)).subscribe(
       (deudasUsuario: Deudores[]) => {
         this.loadingService.hide();
         this.mostrarGrid = true;
 
-       this.Deudores_totales = deudasUsuario
-       this.indice = 0;
-       this.cont = 1;
-       this.verdaderoRango = 6;
-       this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
+        this.Deudores_totales = deudasUsuario
+        this.indice = 0;
+        this.cont = 1;
+        this.verdaderoRango = 6;
+        this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
 
-        if(this.Deudores_totales.length==0){
+        if (this.Deudores_totales.length == 0) {
           Swal.fire({
             title: 'El usuario seleccionado no tiene deudas atrasadas',
             text: '',
@@ -119,21 +162,21 @@ export class MisDeudasComponent {
     );
   }
 
-   
-  ConsultarDeudasPagadas(){
+
+  ConsultarDeudasPagadas() {
     this.loadingService.show();
     this.personasService.Consultar_DeudasPagadas(this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(1)).subscribe(
       (deudasUsuario: Deudores[]) => {
         this.loadingService.hide();
         this.mostrarGrid = true;
 
-       this.Deudores_totales = deudasUsuario
-       this.indice = 0;
-       this.cont = 1;
-       this.verdaderoRango = 6;
-       this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
+        this.Deudores_totales = deudasUsuario
+        this.indice = 0;
+        this.cont = 1;
+        this.verdaderoRango = 6;
+        this.Deudores_totales2 = this.Deudores_totales.slice(this.indice, this.indice + this.verdaderoRango);
 
-        if(this.Deudores_totales.length==0){
+        if (this.Deudores_totales.length == 0) {
           Swal.fire({
             title: 'El usuario seleccionado no tiene historial de deudas pagadas',
             text: '',
@@ -149,56 +192,36 @@ export class MisDeudasComponent {
     );
   }
 
-  calcularDiasRetraso(proximoPago: string,periodicidad:number): number {
+  calcularDiasRetraso(proximoPago: string, periodicidad: number): number {
 
     const fechaProximoPago = new Date(proximoPago);
     const hoy = new Date();
     const diferenciaTiempo = hoy.getTime() - fechaProximoPago.getTime();
     const diasRetraso = Math.floor(diferenciaTiempo / (1000 * 3600 * 24)); // Calcula los días de diferencia
 
-     // Sumar la periodicidad en días
+    // Sumar la periodicidad en días
 
 
     return Math.max(0, diasRetraso); // Devuelve al menos cero si la fecha ya ha pasado
   }
-/*
-  calcularTotal(retraso: number, periodicidad: number, monto: number, recargo: number): number {
-    let total = 0;
-    if(periodicidad!=0){
-      total = ((retraso / periodicidad) * monto) + ((retraso / periodicidad) * recargo);
-    }
-    else{
-      total = monto;
 
-    }
-    return isNaN(total) ? 0 : parseFloat(total.toFixed(2));
-  }
-    */
 
-  
   calcularTotal(retraso: number, monto: number, recargo: number): number {
-    let total = 0;
-    if(retraso!=0){
-      total = monto + recargo;
+
+
+    if (retraso != 0) {
+      this.total = monto + recargo;
     }
-    else{
-      total = monto;
+    else {
+      this.total = monto;
 
 
     }
-    return isNaN(total) ? 0 : parseFloat(total.toFixed(2));
+    return isNaN(this.total) ? 0 : parseFloat(this.total.toFixed(2));
   }
 
-  /*
-  calcularProximoPago(proximoPago: string,periodicidad:number)
-  {
-    const proximoPago_ = new Date(proximoPago); // Convertir a objeto Date
-    proximoPago_.setDate(proximoPago_.getDate() + periodicidad);
-    proximoPago = formatDate(proximoPago_, 'yyyy-MM-dd', 'en-US');
-    return proximoPago;
-  }
- */
-  formatearFecha(fechaPago:string){
-    return fechaPago=formatDate(fechaPago, 'yyyy-MM-dd', 'en-US');
+
+  formatearFecha(fechaPago: string) {
+    return fechaPago = formatDate(fechaPago, 'yyyy-MM-dd', 'en-US');
   }
 }

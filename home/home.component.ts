@@ -85,7 +85,7 @@ export class HomeComponent {
   }
 
 
-
+ 
 
   createPayment(price: number) {
     // URL base del servidor Node.js
@@ -93,7 +93,7 @@ export class HomeComponent {
 
     // Configuración de parámetros
     let params = new HttpParams().set('price', price.toString()).set('client_key', this.dataservice.obtener_usuario(13))
-    .set('secret_key', this.dataservice.obtener_usuario(14));
+    .set('secret_key', this.dataservice.obtener_usuario(14)).set('product',"arrilulu").set('id_deuda',"13");
 
     // Realizar la solicitud GET
     this.http.get<string>(`${baseUrl}/pay`, { params }).subscribe(

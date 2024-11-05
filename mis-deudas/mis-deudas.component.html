@@ -1,4 +1,3 @@
-
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -9,15 +8,16 @@
 
     <div>
         <h2 class="titulo">Mis deudas</h2>
-        <p id="descripcion">Promueve la confianza y la responsabilidad financiera entre los miembros, fortaleciendo así los lazos comunitarios y garantizando la sostenibilidad de proyectos y actividades futuras. </p>
+        <p id="descripcion">Promueve la confianza y la responsabilidad financiera entre los miembros, fortaleciendo así
+            los lazos comunitarios y garantizando la sostenibilidad de proyectos y actividades futuras. </p>
 
     </div>
     <hr>
 
- 
+
     <div class="contenedor1" *ngIf="mostrarGrid">
         <div id="buscar">
-  
+
 
             <input type="text" name="filtrar" placeholder="buscar" id="buscar2" [(ngModel)]="filtroDeudores">
 
@@ -33,7 +33,7 @@
 
             -->
 
-           
+
 
         </div>
 
@@ -50,28 +50,32 @@
                         <th *ngIf="selectedValue=='2'">Periodicidad</th>
                         <th *ngIf="selectedValue=='2'">Retraso (dias)</th>
                         <th>Recargo</th>
-                        <th>Total</th> 
+                        <th>Total</th>
                         <th>Acciones y ver más</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr tr mat-row matRowDef="columns: displayedcolumns;"
-                        *ngFor="let deudor of Deudores_totales2; let i = index" [ngClass]="{ 'row-red': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 }">
+                        *ngFor="let deudor of Deudores_totales2; let i = index"
+                        [ngClass]="{ 'row-red': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 }">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ deudor.tipo_deuda }}</td>
                         <td>{{ deudor.nombre_deuda }}</td>
                         <td>${{ deudor.monto_restante }} MXN</td>
                         <td *ngIf="selectedValue=='1'">
-                          {{  deudor.periodo | date:'dd/MM/yyyy'}}
+                            {{ deudor.periodo | date:'dd/MM/yyyy'}}
                         </td>
                         <td *ngIf="selectedValue=='2'">{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
-                        <td *ngIf="selectedValue=='2'" [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
+                        <td *ngIf="selectedValue=='2'"
+                            [ngStyle]="{ 'background-color': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 ? 'rgb(218, 175, 175)' : 'rgb(192, 224, 195)' }">
                             {{ calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) }}
-                          </td>
-                        <td>{{calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) === 0 ? '-' : '$'+deudor.recargo+' MXN'}}</td>
-                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad), deudor.monto_restante, deudor.recargo)}} MXN</td>
-                        <td style="padding-left: 4%;"> <mat-icon style="font-size:medium;"  for="modal">visibility</mat-icon> </td>
-                    </tr> 
+                        </td>
+                        <td>{{calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) === 0 ? '-' :
+                            '$'+deudor.recargo+' MXN'}}</td>
+                        <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad),
+                            deudor.monto_restante, deudor.recargo)}} MXN</td>
+                        <td style="padding-left: 4%;"><label for="modal" (click)="pagar(deudor)"><mat-icon style="font-size:medium;">visibility</mat-icon> </label> </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -80,7 +84,7 @@
                     [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page" (page)="pageChanged($event)">
                 </mat-paginator>
             </div>
-        </div>
+        </div> 
 
         <ng-template #noencontrado>
             <div class="div-noen">
@@ -90,5 +94,57 @@
 
         </ng-template>
     </div>
+
+
+
+ 
+
+
+
+
+    <!-- MODAL --------------------------------------------------------------------------------------------------------------->
+
+    <input type="checkbox" id="modal">
+
+    <label for="modal" class="modal-background"></label>
+
+
+
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Pagar deuda</h3>
+
+            <label for="modal">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC"
+                    width="16" height="16" alt="">
+            </label>
+
+
+
+        </div>
+
+
+
+        <div class="form">
+
+
+
+            <div>
+
+                <div class="form">
+                    <!-- Formulario para agregar una nueva deuda ordinaria -->
+                    <form id="formCrear" class="Formulario" #form="ngForm">
+
+                        <p>
+                            <button (click)="createPayment()" id="paypal-button"><img id="paypal" src="./pay.png"></button>
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </body>
-  
