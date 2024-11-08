@@ -15,7 +15,7 @@
     <form id="buscar">
       <input type="text" id="tbuscar" class="form-control" name="filtrar" placeholder="buscar"
         [(ngModel)]="filtroUsuarios">
-      <label for="modal" class="boton">Agregar</label>
+      <label for="modal" class="boton" (click)="limpiar()">Agregar</label>
     </form>
 
     <div class="contenedor2" *ngIf="this.usuarios.length>0; else noencontrado">
@@ -61,7 +61,7 @@
             <td>{{usuario.tipo_usuario}}</td>
             <td class="correo">{{usuario.correo}}</td>
             <th>{{usuario.hikvision}}</th>
-            <th><label for="modal_acciones" (click)="seleccionar(usuario.id_persona, usuario.nombre, usuario.apellido_pat, usuario.apellido_mat, usuario.telefono, usuario.tipo_usuario)"><mat-icon
+            <th><label for="modal_acciones" (click)="seleccionar(usuario.id_persona, usuario.nombre, usuario.apellido_pat, usuario.apellido_mat, usuario.telefono, usuario.tipo_usuario, usuario.hikvision)"><mat-icon
                   style="font-size:medium; margin-left: 30px;">visibility</mat-icon></label></th>
 
  
@@ -280,11 +280,11 @@
         </p>
 
         
-        <select class="textb" style="height: 20px;" [(ngModel)]="usuario.tipo_usuario" (change)="onEventUsuario($event)">
-          <option value="null" disabled selected>-- Permisos de usuario --</option>
+        <select class="textb" style="height: 20px;" [(ngModel)]="usuario.tipo_usuario" (change)="onEventUsuario($event)" formControlName="tipo_usuario">
+          <option value="" disabled selected>-- Permisos de usuario --</option>
           <option value="usuario">usuario</option>
           <option value="tesorero">tesorero</option>
-        </select>
+        </select> 
 
         <p>
           <label id="agregar" (click)="actualizar_usuario(UserGroup1.value)">Modificar</label>
@@ -293,12 +293,21 @@
 
         <label style="margin-right: 20px;">Acceso del usuario a la comunidad</label>
 
-        <p class="acceso">
+        <p class="acceso" *ngIf="ip">
 
-          <label id="habilitar" class="acceso" (click)="enable(usuario)" >Permitir</label>
-          <label id="deshabilitar" class="acceso" (click)="disable(usuario)" >Deshabilitar</label>
-          <label id="borrar" class="acceso" (click)="delete(usuario)" >Borrar</label>
+          <label id="habilitar" class="acceso" (click)="enable(usuario)" *ngIf="!agregar">Permitir</label>
+          <label id="deshabilitar" class="acceso" (click)="disable(usuario)" *ngIf="!agregar">Deshabilitar</label>
+          <label id="borrar" class="acceso" (click)="delete(usuario)" *ngIf="!agregar">Borrar</label>
+
+          <label id="habilitar" class="acceso" (click)="agregarPersonaHik()" *ngIf="agregar">Agregar</label>
+
         </p>
+
+        <p class="acceso" *ngIf="!ip" style="padding-right: 25px;">
+
+          <label>Sin conexión a panel de acceso</label>
+        </p>
+
 
       </form>
 

@@ -422,16 +422,23 @@ form {
 
   /* Estilos para el botón */
   .form-carta button {
-    background-color: #fff;
-    color: #3498db;
-    padding: 10px 20px;
+    background-color: #33383b;
+    color: white;
+    padding: 15px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   .form-carta button:hover {
-    background-color: #2980b9;
+    background-color: #6c5bb8;
     color: #fff;
+
+  }
+
+
+  .boton{
+    background-color: #33383b;
+    color: white;
   }

@@ -291,7 +291,7 @@ export class EditarCuentaComponent {
 
 
 
-    return this.http.put("http://159.54.141.160/api/Personas/Actualizar_Persona", params).subscribe(
+    return this.http.put("https://localhost:44397/api/Personas/Actualizar_Persona", params).subscribe(
       (_response) => {
 
         Swal.fire({
@@ -313,7 +313,7 @@ export class EditarCuentaComponent {
 
 
         console.log("hola");
-        console.log("http://159.54.141.160/api/Personas/Actualizar_Persona", params);
+        console.log("https://localhost:44397/api/Personas/Actualizar_Persona", params);
 
 
         this.ngOnInit();

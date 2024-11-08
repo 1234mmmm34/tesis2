@@ -16,7 +16,7 @@ body {
 }
 
 #paypal{
-background-image: url("./pay.png");
+/*background-image: url("./pay.png");*/
 }
 
 #spei{
@@ -28,6 +28,27 @@ background-color: #ffc43c;
 border-radius: 10px;
 width: 270px;
 border: 0px;
+}
+
+
+.overlay {
+  position: absolute; /* Permite superponer el div sobre el contenedor */
+  
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex; /* Para centrar el texto */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  color: white; /* Color del texto */
+  font-size: 1em; /* Tamaño del texto */
+  border-radius: 10px; /* Opcional: Para que coincida con el contenedor */
+
+  top: 170px;
+  height: 640px;
+  width: 450px;
+  margin-left: 57%;
+
+  padding-top: 80px;
+  padding-left: 15px;
 }
 
 
@@ -75,7 +96,7 @@ textarea{
 }
 
 .contenedor2 {
-  height: 450px;
+  height: 400px;
   width: 53%;
   background-color: #ffffff;
 
@@ -95,7 +116,7 @@ textarea{
   background-color: #ffffff;
   border-collapse: collapse;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 640px;
+  height: 590px;
   width: 450px;
   margin-left: 57%;
 
@@ -248,17 +269,6 @@ hr {
 
 
 
-table {
-  background-color: #ffffff;
-  position: absolute;
-  top: 300px;
-  width: 90%;
-  font: 1em sans-serif;
-  margin: auto;
-
-  border-collapse: collapse;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
 
 .pages {
   display: flex;
@@ -386,14 +396,14 @@ input[type="checkbox"]:checked ~ .modal-background {
   left: 70px;
 }
 
-/*
+
 ng-template{
-  background-image: url("./no-en1.jpg");
+  background-image: url("./no.png");
 
 
   
 }
-  */
+
 
 .div-noen {
 

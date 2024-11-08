@@ -191,7 +191,7 @@ export class GruposComponent{
     this.loadingService.show()
 
     const headers = new HttpHeaders({'myHeader': 'procademy'});
-    this.http.post("http://159.54.141.160/api/Grupos/Agregar_Grupo",this.grupo, {headers: headers})
+    this.http.post("https://localhost:44397/api/Grupos/Agregar_Grupo",this.grupo, {headers: headers})
       .subscribe((res) => {
         this.loadingService.hide()
 
@@ -224,7 +224,7 @@ export class GruposComponent{
 
     console.log("seleccion: ", this.seleccionados)
 
-    this.http.post("http://159.54.141.160/api/Grupos/Agregar_Persona_Grupo",this.seleccionados, {headers: headers})
+    this.http.post("https://localhost:44397/api/Grupos/Agregar_Persona_Grupo",this.seleccionados, {headers: headers})
       .subscribe((res) => {
         this.loadingService.hide()
         this.seleccionados = [];
@@ -261,7 +261,7 @@ export class GruposComponent{
     this.loadingService.show()
 
     const headers = new HttpHeaders({'myHeader': 'procademy'});
-    this.http.post("http://159.54.141.160/api/Grupos/Agregar_Grupo",this.grupo, {headers: headers})
+    this.http.post("https://localhost:44397/api/Grupos/Agregar_Grupo",this.grupo, {headers: headers})
       .subscribe((res) => {
         this.loadingService.hide()
 

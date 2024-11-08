@@ -9,8 +9,8 @@ body {
 }
 
 .contenedor1 {
-  display: flexbox; 
-  margin: 0%; 
+  display: flexbox;
+  margin: 0%;
 
 }
 
@@ -19,7 +19,7 @@ body {
   border-bottom:1px solid #757575;
   border-radius: 0%;
   width: 270px !important;
-  
+
 
 }
 
@@ -33,7 +33,7 @@ textarea{
 
 
 .asunto{
-  padding-left: 20px; 
+  padding-left: 20px;
 }
 
 
@@ -42,9 +42,11 @@ textarea{
   border-radius: 5px;
   width: 350px;
   height: 40px;
-  outline: 0; 
+  outline: 0;
   padding-left: 20px;
   margin-left: 50px;
+  margin-right: 500px;
+
 
 }
 
@@ -73,16 +75,17 @@ textarea{
   text-transform: uppercase;
   border-color: #242434;
   border-radius: 5px;
-  border: none;
 
-  padding-left: 10px;
-  padding-right: 10px;
 
   padding-top: 10px;
+  margin-left: 20%;
+  margin-right: 3%;
 
 
 
 }
+
+
 
 mat-icon:hover {
   color: #6c5bb8; /* Cambia 'blue' al color que desees */
@@ -178,7 +181,7 @@ table {
   margin: auto;
 
   border-collapse: collapse;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pages {
@@ -221,6 +224,49 @@ input[type="checkbox"]:checked ~ .modal,
 input[type="checkbox"]:checked ~ .modal-background {
 	display: block;
 }
+
+#modal_acciones:checked ~ .modal_acciones,
+#modal_acciones:checked ~ .modal-background {
+	display: block;
+}
+
+.modal-background {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none; /* Oculto por defecto */
+  z-index: 9998;
+
+}
+
+.modal_acciones {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: none; /* Oculto por defecto */
+  width: 500px;
+  height: 480px;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 9999;
+  border-radius: 5px;
+}
+
+/* Opcional: Para agregar algo de espacio en el contenido del modal */
+.modal_acciones > p {
+  margin-bottom: 20px;
+}
+
+#modal_acciones{
+  display: none;
+}
+
 
 
 .modal-background {
@@ -311,18 +357,18 @@ ng-template{
   background-image: url("./notfound.png");
 
 
-  
+
 }
 
 .div-noen {
 
- 
+
   margin-top: 120px;
 
   display: flex;
   justify-content: center; /* Centra los elementos horizontalmente */
   align-items: center; /* Centra los elementos verticalmente */
-  
+
 }
 
 .noencontrado{
@@ -330,7 +376,7 @@ ng-template{
 width: 650px;
 height: 500px;
 left: 10%;
- 
+
 }
 
 
@@ -384,7 +430,7 @@ left: 10%;
 
 
 @media screen and (max-width: 700px) {
- 
+
   thead tr {
     position: absolute;
     top: -9999px;
@@ -406,7 +452,7 @@ left: 10%;
 
 
         /* Ajusta el ancho de la celda para que ocupe el 100% del ancho de la pantalla */
-     
+
         /* Elimina el padding izquierdo para que el contenido comience desde el borde izquierdo */
         padding-left: 0;
   }
@@ -430,7 +476,7 @@ left: 10%;
   }
 
 
-  
+
 #buscar {
 
   display: flex;
@@ -457,4 +503,46 @@ thead{
 .asunto{
   width: 30%;
 }
-} 
+}
+
+
+.textb{
+  left: 200px;
+  margin-right: 0px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid #797474;
+  text-align: center;
+
+  width: 350px;
+  height: 40px;
+  outline: 0;
+ }
+
+
+ .acceso{
+  display: flex;
+  gap: 10px;
+  margin-right: 50px;
+  padding-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  border: 1px solid #d1c6c6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 20px;
+  color: white;
+}
+
+
+.pages {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+}
+#pageNumber {
+  width: 60px;
+}

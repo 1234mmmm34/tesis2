@@ -8,12 +8,12 @@ import { Personas } from './personas.model'; // Asegúrate de importar el modelo
 })
 export class PersonasService {
 
-  private apiUrl = 'http://159.54.141.160/api'; // Reemplaza con la URL de tu backend
+  private apiUrl = 'https://localhost:44397/api'; // Reemplaza con la URL de tu backend
 
   constructor(private http: HttpClient) { }
 
   consultarPersonasPorFraccionamiento(idFraccionamiento: number): Observable<Personas[]> {
-    const url = `http://159.54.141.160/api/Usuarios/Consultar_Personas_Por_Fraccionamiento?id_fraccionamiento=${idFraccionamiento}`;
+    const url = `https://localhost:44397/api/Usuarios/Consultar_Personas_Por_Fraccionamiento?id_fraccionamiento=${idFraccionamiento}`;
     return this.http.get<Personas[]>(url);
   }
 }

@@ -8,6 +8,7 @@ destinatario: string;
 asunto: string;
 mensaje: string;
 visualizacion: number;
+fecha:string;
 
 constructor(
   id_notificacion: number,
@@ -19,6 +20,7 @@ constructor(
   asunto: string,
   mensaje: string,
   visualizacion: number,
+  fecha:string
 
 ) {
   this.id_notificacion = id_notificacion;
@@ -30,5 +32,6 @@ constructor(
   this.asunto = asunto;
   this.mensaje = mensaje;
   this.visualizacion = visualizacion
+  this.fecha=fecha;
 }
 }

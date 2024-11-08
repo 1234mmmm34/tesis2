@@ -40,19 +40,20 @@ export class PanelPrincipalAdminComponent {
 
 
   fillerNav = [
-    { name: "Home", route: "Home", icon: "home" },
+    {name:"Home", route:"Home", icon:"home"},
     { name: "Acuerdos", route: "Acuerdos", icon: "assignment" },
-    { name: "Notificaciones", route: "Notificaciones", icon: "priority_high" },
+    // { name: "Notificaciones", route: "Notificaciones_usuarios", icon: "priority_high" },
     { name: 'Usuarios', route: "Usuarios", icon: "supervised_user_circle" },
     { name: "Controlador", route: "Controlador", icon: "cast_connected" },
     //{ name: "Contr", route: "Invitacion", icon: "cast_connected" },
 
-
+/*
     {
       name: '', route: "", icon: "", children: [
         { name: '', route: "", icon: "" }
       ]
     },
+    */
   ]
 
 
@@ -96,7 +97,7 @@ export class PanelPrincipalAdminComponent {
         $(this).find('ul').toggle();
       });
     });
-    
+
 
   }
 
@@ -138,13 +139,13 @@ export class PanelPrincipalAdminComponent {
 
 
 
-  
+
   consultarNotificacion(idFraccionamiento: any, indice: number, verdaderoRango: number, id_destinatario: number) {
 
 
     this.NotificacionesService.consultarNotificacion(idFraccionamiento, id_destinatario).subscribe((notificaciones: Notificaciones[]) => {
 
-      
+
       this.notificaciones = notificaciones;
       this.indice = 0;
       this.verdaderoRango = 6;

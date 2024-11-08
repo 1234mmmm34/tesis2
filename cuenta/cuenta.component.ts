@@ -136,7 +136,7 @@ export class CuentaComponent {
 
       this.menuItems = [
          { title: 'Mi cuenta', subItems: ['Editar perfil', 'Restablecer contraseña'], icon: "account_circle", route:"EditarCuenta" },
-         { title: 'Politicas y privacidad', icon: 'privacy_tip' },
+     //    { title: 'Politicas y privacidad', icon: 'privacy_tip' },
          // { title: 'Apariencia', icon: 'settings_system_daydream'},
 
 
@@ -146,11 +146,11 @@ export class CuentaComponent {
       this.menuItems = [
      //    { path: '', route: 'EditarCuenta' },
          { title: 'Mi cuenta', path: '', subItems: ['Editar perfil', 'Restablecer contraseña'], icon: "account_circle", route:"EditarCuenta" },
-         { title: 'Mi comunidad', subItems: ['Crear grupo'], icon: "people", route:"Grupos"},
-         { title: 'Notificaciones', subItems: ['Configuración general'], icon: "notifications" },
-         { title: 'Acuerdos', subItems: ['Configuración general'], icon: "assignment" },
-         { title: 'Pagos', subItems: ['Configuración general', 'Pagos en línea'], icon: "payment", route: "Paypal" },
-         { title: 'Politicas y privacidad', icon: 'privacy_tip' },
+       //  { title: 'Mi comunidad', subItems: ['Crear grupo'], icon: "people", route:"Grupos"},
+       //  { title: 'Notificaciones', subItems: ['Configuración general'], icon: "notifications" },
+       //  { title: 'Acuerdos', subItems: ['Configuración general'], icon: "assignment" },
+      //   { title: 'Pagos', subItems: ['Configuración general', 'Pagos en línea'], icon: "payment", route: "Paypal" },
+      //   { title: 'Politicas y privacidad', icon: 'privacy_tip' },
          // { title: 'Apariencia', icon: 'settings_system_daydream'},
 
 
@@ -319,7 +319,7 @@ export class CuentaComponent {
 
 
 
-    return this.http.put("http://159.54.141.160/api/Personas/Actualizar_Persona", params).subscribe(
+    return this.http.put("https://localhost:44397/api/Personas/Actualizar_Persona", params).subscribe(
       (_response) => {
 
         Swal.fire({
@@ -341,7 +341,7 @@ export class CuentaComponent {
 
 
         console.log("hola");
-        console.log("http://159.54.141.160/api/Personas/Actualizar_Persona", params);
+        console.log("https://localhost:44397/api/Personas/Actualizar_Persona", params);
 
 
         this.ngOnInit();

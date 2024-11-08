@@ -271,7 +271,7 @@ export class PropiedadesComponent {
         //  Codigo_acceso: "123"
       };
       console.log("PARAMSS: ", params)
-      let direccion = "http://159.54.141.160/api/Usuarios/Agregar_Usuario";
+      let direccion = "https://localhost:44397/api/Usuarios/Agregar_Usuario";
 
       const headers = new HttpHeaders({ 'myHeader': 'procademy' });
       this.http.post(
@@ -407,7 +407,7 @@ export class PropiedadesComponent {
         //  Codigo_acceso: "123"
       };
       console.log(params)
-      let direccion = "http://159.54.141.160/api/Usuarios/Agregar_Usuario";
+      let direccion = "https://localhost:44397/api/Usuarios/Agregar_Usuario";
 
       const headers = new HttpHeaders({ 'myHeader': 'procademy' });
       this.http.post(
@@ -481,7 +481,7 @@ export class PropiedadesComponent {
 
     console.log("params: ", params)
 
-    let direccion = "http://159.54.141.160/api/Usuario_lote/Agregar_inquilino";
+    let direccion = "https://localhost:44397/api/Usuario_lote/Agregar_inquilino";
 
     const headers = new HttpHeaders({ 'myHeader': 'procademy' });
     this.http.post(
@@ -582,7 +582,7 @@ export class PropiedadesComponent {
 
     console.log("params: ", params)
 
-    let direccion = "http://159.54.141.160/Propiedades/Agregar_Propiedad";
+    let direccion = "https://localhost:44397/Propiedades/Agregar_Propiedad";
 
     const headers = new HttpHeaders({ 'myHeader': 'procademy' });
     this.http.post(
@@ -617,7 +617,7 @@ export class PropiedadesComponent {
 
 
   delete(id_lote: any) {
-    return this.http.delete("http://159.54.141.160/Propiedades/Eliminar_Propiedad?id_lote=" + id_lote).subscribe(
+    return this.http.delete("https://localhost:44397/Propiedades/Eliminar_Propiedad?id_lote=" + id_lote).subscribe(
       () => {
         this.fetchDataPropiedades(this.dataService.obtener_usuario(1))
         console.log("hola");
@@ -628,7 +628,7 @@ export class PropiedadesComponent {
 
 
   delete_user(id_usuario_lote: any) {
-    return this.http.delete("http://159.54.141.160/api/Usuario_lote/Eliminar_inquilino?id_lote=" + id_usuario_lote).subscribe(
+    return this.http.delete("https://localhost:44397/api/Usuario_lote/Eliminar_inquilino?id_lote=" + id_usuario_lote).subscribe(
       () => {
         console.log("eliminado", this.id_lote)
         this.fetchDataPersonasLote(this.id_lote);
@@ -668,7 +668,7 @@ export class PropiedadesComponent {
 
     console.log("actualizar: ", params)
 
-    return this.http.put("http://159.54.141.160/Propiedades/Actualizar_Propiedad", params).subscribe(
+    return this.http.put("https://localhost:44397/Propiedades/Actualizar_Propiedad", params).subscribe(
       (_response) => {
         console.log("actualiza", params)
         this.ngOnInit();

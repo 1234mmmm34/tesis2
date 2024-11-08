@@ -25,6 +25,9 @@ export class RecuperacionContraseniaComponent {
     });
   }
 
+  correoEnviado:any=false;
+  tokenIntroducido:boolean= false;
+
   correo: string = '';
   codigo: string = '';
   password: string = '';
@@ -40,6 +43,7 @@ export class RecuperacionContraseniaComponent {
     if(this.validarCorreo()){
       this.correoService.Enviar_Correo(formValues.correo, "Tu código para recuperar tu contraseña es: \n"+this.token);
       this.cambioContrasenaForm.get('correo')?.disable();
+      this.correoEnviado=true;
       Swal.fire({
         title: 'Correo Electrónico Enviado',
         text: 'Utiliza el codigo enviado a tu correo para reestablecer tu contraseña, !no recargues ni cambies de pagina!',
@@ -130,7 +134,14 @@ export class RecuperacionContraseniaComponent {
       if(formValues.contrasena==formValues.confirmarContrasena){
         return true;
       }else{
+        Swal.fire({
+          title: 'Verifica contraseñas',
+          text: 'Las contraseñas introducidas deben coincidir',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        })
         return false;
+
       }
     }else{
       Swal.fire({
@@ -141,6 +152,23 @@ export class RecuperacionContraseniaComponent {
       })
       return false;
     }
+
+  }
+
+  siguiente(){
+    const formValues = this.cambioContrasenaForm.getRawValue();
+    if(this.token==formValues.codigo){
+      this.tokenIntroducido=true;
+      this.correoEnviado=undefined;
+    }else{
+      Swal.fire({
+        title: 'Token erroneo',
+        text: 'el token introducido no coincide con el enviado al correo electrónico',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
+
 
   }
 

@@ -1,7 +1,7 @@
 body{
   background-color: #f2f3f4;
   margin: auto;
-} 
+}
 
 #conexion{
   border-radius: 50%;
@@ -24,6 +24,7 @@ li {
   position: absolute;
   top: 80px;
   left: 30%;
+  margin-left: 50px;
 
 
 
@@ -34,12 +35,12 @@ li {
   width: 420px;
   height: 400px;
   margin-left: 40%;
-  background-image: url("controlador.png");
+  background-image: url("./controlador.png"); 
   background-repeat: no-repeat;
 }
 
 #mensaje-bienvenida{
- 
+
   margin-left: 35%;
   width: 100%;
 }
@@ -52,7 +53,7 @@ li {
   height: 100%;
   box-shadow: 0px 0px 10px 0px #a7a4a4 inset; /* Sombra */
   padding-left: 30px;
-  
+
 
 
 }
@@ -119,7 +120,7 @@ ul {
   margin-left: 50px;
 
 
- 
+
 }
 
 .Formulario{
@@ -127,8 +128,8 @@ ul {
   flex-direction: column;
   grid-gap: 0.20rem;
   height: 400px;
-  
-  
+
+
 }
 
 
@@ -144,7 +145,7 @@ th{
 
 tr{
   text-align: left;
-  
+
   height: 40px;
 
 }
@@ -172,7 +173,7 @@ input, select{
   position:absolute; top:40px; left:550px;
   width: 610px;
   border: #757575;
-} 
+}
 
 
 
@@ -257,12 +258,12 @@ input, select{
 }
 
 .top{
-  
+
 
 
   box-shadow: 0px 0px 10px 0px #a7a4a4; /* Sombra */
   padding-bottom: 10px;
-  
+
   z-index: -1;
 
 }

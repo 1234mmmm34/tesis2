@@ -143,7 +143,7 @@ export class DeudoresComponent {
   }
 
 
-  apiUrl:string = 'http://159.54.141.160/Reportes/Reporte_Deudores';
+  apiUrl:string = 'https://localhost:44397/Reportes/Reporte_Deudores';
   reporteDedudores(){
     this.loadingService.show();
 

@@ -9,8 +9,8 @@ import { Proveedor } from './proveedor.model';
 export class ProveedoresService {
 
 
-  //private apiUrl = 'http://159.54.141.160/Proveedores'; // URL base
-  private apiUrl = 'http://159.54.141.160/Proveedores'; // URL base
+  //private apiUrl = 'https://localhost:44397/Proveedores'; // URL base
+  private apiUrl = 'https://localhost:44397/Proveedores'; // URL base
 
   constructor(private http: HttpClient) { }
 

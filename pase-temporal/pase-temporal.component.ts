@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./pase-temporal.component.css']
 })
 export class PaseTemporalComponent implements OnInit, OnDestroy {
-  private apiUrl = 'http://159.54.141.160';
+  private apiUrl = 'https://localhost:44397';
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 

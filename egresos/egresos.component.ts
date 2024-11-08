@@ -219,7 +219,7 @@ export class EgresosComponent {
     return `${partesFecha[2]}-${partesFecha[1]}-${partesFecha[0]}`;
   }
 
-  apiUrl:string = 'http://159.54.141.160/Reportes/Reporte_Egresos';
+  apiUrl:string = 'https://localhost:44397/Reportes/Reporte_Egresos';
   reporteEgresos(){
     this.loadingService.show();
 

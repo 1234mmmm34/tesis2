@@ -10,7 +10,7 @@ export class EgresosService {
 
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'http://159.54.141.160/Egresos';
+  private apiUrl = 'https://localhost:44397/Egresos';
 
   agregarEgreso(idFraccionamiento: number, concepto: string, descripcion: string, proveedor: string, monto: number, fecha: string): Observable<boolean> {
     const url = `${this.apiUrl}/Agregar_Egreso?id_fraccionamiento=${idFraccionamiento}&concepto=${concepto}&descripcion=${descripcion}&proveedor=${proveedor}&monto=${monto}&fecha=${fecha}`;

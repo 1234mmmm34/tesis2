@@ -13,7 +13,7 @@ import { DeudaService } from '../ingresos-extraordinarios/deuda.service';
 import { formatDate } from '@angular/common';
 import { Deudores } from '../ingresos-extraordinarios/deudores.model';
 import { LoadingService } from '../loading-spinner/loading-spinner.service';
-import {getDownloadURL, ref, Storage, uploadBytesResumable} from '@angular/fire/storage';
+import { getDownloadURL, ref, Storage, uploadBytesResumable } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-ingresos',
@@ -21,7 +21,7 @@ import {getDownloadURL, ref, Storage, uploadBytesResumable} from '@angular/fire/
   styleUrls: ['./ingresos.component.css']
 })
 export class IngresosComponent {
-  tipo_formulario: string = '';
+  tipo_formulario: number = 0;
   httpclient: any;
   UserGroup: FormGroup;
   // UserGroup2: FormGroup;
@@ -45,6 +45,7 @@ export class IngresosComponent {
   monto_restante: number = 0;
   fecha_actual: string = new Date().toISOString().split('T')[0]; // 'yyyy-MM-dd'
   subdeuda: number = 0;
+  id: number = 0;
 
 
   deudasDelUsuario: Deudores[] = [];
@@ -60,6 +61,8 @@ export class IngresosComponent {
 
 
   mostrarGrid: boolean = false;
+  op: boolean = false;
+
 
   constructor(private personasService: PersonasService, private deudaService: DeudaService, private renderer: Renderer2, private el: ElementRef, private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private personaService: PersonasService, private loadingService: LoadingService) {
 
@@ -186,11 +189,14 @@ export class IngresosComponent {
 
   onChangeSelection(event: any) {
 
-    if (event.target.value == 'extraordinario') {
-      this.formulario = 'extraordinarios'
+    if (event.target.value == '0') {
+      this.consultarHistorialDeudas(this.dataService.obtener_usuario(3));
+      this.op = false;
     }
     else {
-      this.formulario = 'ordinarios'
+      this.consultarDeudasPendientes(this.dataService.obtener_usuario(3));
+      this.op = true;
+
     }
   }
 
@@ -221,6 +227,24 @@ export class IngresosComponent {
     this.loadingService.show()
 
     this.dataService.fetchDataHistorialDeudas(id_fraccionamiento).subscribe((historial: historial[]) => {
+
+
+      this.mostrarGrid = true;
+      this.loadingService.hide()
+
+      console.log(historial);
+      this.historial = historial;
+      this.historial1 = this.historial.slice(this.indice, this.indice + this.verdaderoRango);
+    });
+  }
+
+
+  consultarDeudasPendientes(id_fraccionamiento: any) {
+
+
+    this.loadingService.show()
+
+    this.dataService.fetchDataDeudasPendientes(id_fraccionamiento).subscribe((historial: historial[]) => {
 
 
       this.mostrarGrid = true;
@@ -325,9 +349,9 @@ export class IngresosComponent {
     return this.http.delete("https://localhost:44397/api/Deudas/Eliminar_Deuda?id_deudas="+id_deudas).subscribe(
       () => {
         this.consultarHistorialDeudas(this.dataService.obtener_usuario(3));
-   
+
       })
-  
+
   }
   */
 
@@ -377,6 +401,7 @@ export class IngresosComponent {
     //  const selectedIndex = event.target.selectedIndex;
     const deudaSeleccionada = this.deudasDelUsuario[event.target.selectedIndex - 1];
     this.id_deuda = deudaSeleccionada.id_deuda;
+
     // console.log("deuda: ",deudaSeleccionada)
 
     //this.monto_restante = deudaSeleccionada.monto_restante;
@@ -417,6 +442,50 @@ export class IngresosComponent {
 
   }
 
+
+
+
+  ClickDeuda(deuda: any) {
+    // const deudaSeleccionada = this.deudasDelUsuario[deuda.selectedIndex - 1];
+    this.id = deuda.id;
+    this.id_deuda = deuda.id_deuda;
+    this.id_deudor = deuda.id_deudor;
+
+    this.periodicidad = deuda.periodicidad;
+
+    this.recargo = 0;
+
+    this.fecha_corte = formatDate(deuda.proximo_pago, 'yyyy-MM-dd', 'en-US');
+    if (this.fecha_corte < this.fecha_actual) {
+      this.recargo = deuda.recargo;
+    }
+
+    this.subdeuda = deuda.subdeuda;
+
+    // Calcular la fecha del próximo pago sumando la periodicidad a la fecha de vencimiento
+    const proximoPago = new Date(deuda.proximo_pago); // Convertir a objeto Date
+    proximoPago.setDate(proximoPago.getDate() + this.periodicidad); // Sumar la periodicidad en días
+
+    // Formatear la fecha del próximo pago
+    this.fechaProximoPago = formatDate(proximoPago, 'yyyy-MM-dd', 'en-US');
+
+    const fechaActual = new Date(); // Fecha actual
+    this.diasAtraso = Math.floor((fechaActual.getTime() - proximoPago.getTime()) / (1000 * 3600 * 24));
+
+    // Verificar si los días de atraso son mayores que los días de gracia y agregar recargo
+
+    this.total = deuda.monto_restante
+
+    if (this.diasAtraso > deuda.dias_gracia) {
+      // Agregar el recargo al monto de la deuda
+
+      this.total += deuda.recargo; // Agregar el valor de lote al recargo
+
+    }
+
+  }
+
+
   private storage: Storage = inject(Storage);
   urlComprobante: string = '';
 
@@ -454,26 +523,28 @@ export class IngresosComponent {
 
   async Generar_Recibo(id_deuda: number): Promise<void> {
     try {
-        const response = await fetch(`https://localhost:44397/api/Deudas/GenerarRecibo?id_deuda=${id_deuda}`);
-        if (response.ok) {
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `recibo_${id_deuda}.pdf`; // Nombre del archivo
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
-        }
+      const response = await fetch(`https://localhost:44397/api/Deudas/GenerarRecibo?id_deuda=${id_deuda}`);
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `recibo_${id_deuda}.pdf`; // Nombre del archivo
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      }
     } catch {
-        console.error('Error al generar el recibo.');
+      console.error('Error al generar el recibo.');
     }
-}
+  }
 
+  comprobante(url: any) {
+    this.urlComprobante = url;
+  }
 
-
-  async pagarDeudaExtraordinaria(montoDeudaExtra: any) {
+  async pagarDeudaExtraordinaria(montoDeudaExtra: any, op: any) {
 
     this.tipo_pago = "pagado";
 
@@ -481,14 +552,22 @@ export class IngresosComponent {
       this.tipo_pago = "abono";
       //  montoDeudaExtra = this.monto_restante - montoDeudaExtra;
     }
+    if(op==1){
+      this.tipo_pago = "pagado";
+    }
 
-    if (this.archivoSeleccionado) {
-    try {
 
-      await this.guardarImagenFirebase();
+    console.log("pago: ",this.total, "p:", montoDeudaExtra)
 
-    
-        this.deudaService.pagarDeudaExtraordinaria(this.recargo, this.id_deudor, this.id_deuda, this.dataService.obtener_usuario(3), this.fechaProximoPago, this.urlComprobante , this.tipo_pago, this.total, montoDeudaExtra, this.subdeuda).subscribe(
+    if (this.archivoSeleccionado || op==1) {
+      try {
+
+        if(op==0){
+          await this.guardarImagenFirebase();
+        }
+
+
+        this.deudaService.pagarDeudaExtraordinaria(this.recargo, this.id_deudor, this.id_deuda, this.dataService.obtener_usuario(3), this.fechaProximoPago, this.urlComprobante, this.tipo_pago, this.total, montoDeudaExtra, this.subdeuda).subscribe(
           (respuesta) => {
             if (respuesta) {
               Swal.fire({
@@ -537,8 +616,9 @@ export class IngresosComponent {
         confirmButtonText: 'Aceptar'
       });
     }
+
   }
-  
+
 
 
   imagenSeleccionada: any; // Variable para mostrar la imagen seleccionada en la interfaz
@@ -570,24 +650,64 @@ export class IngresosComponent {
   }
 
 
-  apiUrl:string = 'http://159.54.141.160/Reportes/Reporte_IngresosDeudas';
-  reporteIngresos(){
+  apiUrl: string = 'https://localhost:44397/Reportes/Reporte_IngresosDeudas';
+  reporteIngresos() {
     this.loadingService.show();
 
 
     this.http.get(`${this.apiUrl}?id_fraccionamiento=${this.dataService.obtener_usuario(3)}`, { responseType: 'blob' })
-    .subscribe(blob => {
-      this.loadingService.hide();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `reporte_IngresosFraccionamiento_${this.dataService.obtener_usuario(3)}.pdf`; // Nombre del archivo a descargar
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }, error => {
-      console.error('Error al descargar el reporte:', error);
-    });
-}
+      .subscribe(blob => {
+        this.loadingService.hide();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `reporte_IngresosFraccionamiento_${this.dataService.obtener_usuario(3)}.pdf`; // Nombre del archivo a descargar
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, error => {
+        console.error('Error al descargar el reporte:', error);
+      });
+  }
+
+
+
+  Actualizar_Solicitudes(id: number){
+
+ console.log("id: ", id)
+
+    return this.http.put("https://localhost:44397/api/Deudas/Eliminar_DeudasEnviadas?id_deuda="+id,1).subscribe(
+      () => {
+        Swal.fire({
+          title: 'Solicitud rechazada',
+          text: '',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        })
+        this.consultarDeudasPendientes(this.dataService.obtener_usuario(3));
+        this.op = true;
+
+      },
+      (error) => {
+        console.error('Error al agregar notificación Angular:', error);
+        Swal.fire({
+          title: 'Por favor, complete todos los campos',
+          text: '',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+
+
+
+
+      })
+
+
+
+
+
+
+
+    }
 }
 

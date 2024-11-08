@@ -15,71 +15,66 @@
             sentido de pertenencia. </p>
 
     </div>
-    <hr>  
+    <hr>
 
 
     <div class="contenedor1" *ngIf="mostrarGrid">
         <div id="buscar">
 
-  
+
             <input type="text" name="filtrar" placeholder="buscar" id="buscar2" [(ngModel)]="filtroAcuerdos">
-            <input type="date" name="filtrarFecha" [(ngModel)]="filtroFecha" id="buscar1" (ngModelChange)="onFechaSeleccionada()">
+
             <div style="display: flex; align-items: center; margin-left: 65%;">
-                <mat-icon style="font-size:xx-large; padding-top: 13px; width: 24%;height: 100%;">settings</mat-icon>
-                <label for="modal" class="boton" style="margin-right: 10px;">Agregar</label>
+
+                <label for="modal" class="boton" style="padding: 10px; position: absolute; right: 20px;">Agregar</label>
             </div>
 
 
         </div>
 
         <!-- *ngIf="this.acuerdos1.length>0; else noencontrado"  -->
- 
-        <div class="contenedor2" *ngIf="this.acuerdos1.length>0; else noencontrado">
 
-            <table class="table" width="100%">
-                <thead>
-                    <tr>
+        <div class="contenedor2" *ngIf="this.acuerdos1.length > 0; else noencontrado">
+          <table class="table" width="100%">
+              <thead>
+                  <tr>
+                      <th scope="col" class="asunto">Asunto</th>
+                      <th scope="col">Detalles</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col" style="text-align:center;width:200px;">Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let acuerdo of acuerdos1 | filtroAcuerdos: 'asunto': filtroAcuerdos | filtroFecha: 'fecha': filtroFecha">
+                      <td class="asunto">{{ acuerdo.asunto }}</td>
+                      <td>{{ acuerdo.detalles }}</td>
+                      <td>{{ acuerdo.fecha }}</td>
+                      <td>
+                          <label for="modal_acciones" (click)="seleccionar(acuerdo)">
+                              <mat-icon style="font-size:medium; margin-left: 30px;">visibility</mat-icon>
+                          </label>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
 
-                        <th scope="col" class="asunto">Asunto</th>
-                        <th scope="col">Detalles</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col" style="text-align:center;width:200px;">
-                            Acciones
-                        </th>
-                    </tr> 
-                </thead>
-                <tbody>
-                    <tr tr mat-row matRowDef="columns: displayedcolumns;"
-                        *ngFor="let acuerdo of acuerdos1 | filtroAcuerdos: 'asunto': filtroAcuerdos | filtroFecha: 'fecha': filtroFecha">
-                        <td class="asunto">{{ acuerdo.asunto }}</td>
-                        <td>{{ acuerdo.detalles }}</td>
-                        <td class="fecha">{{ acuerdo.fecha | date:'dd/MM/yyyy' }}</td>
-                        <td id="td-view">
 
-                            <button type="button" id="view-button">
-                                <mat-icon style="font-size:medium;">visibility</mat-icon>
-                            </button>
 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
 
-    
-            <div class="pages">
-                <mat-paginator [length]="acuerdos.length" [pageSize]="verdaderoRango" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page" (page)="pageChanged($event)">
-                </mat-paginator>
-            </div>
-        
-        </div>
+          <div class="pages">
+            <mat-paginator [length]="acuerdos1.length" [pageSize]="verdaderoRango" [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page" (page)="pageChanged($event)">
+            </mat-paginator>
+          </div>
+      </div>
 
-    
-         
+
+
         <ng-template #noencontrado>
             <div class="div-noen">
                 <img class="noencontrado" src="./notfound.png" alt="hola">
             </div>
-        </ng-template> 
+        </ng-template>
 
 
 
@@ -107,7 +102,7 @@
 
             </div>
 
- 
+
             <div class="form">
 
                 <!-- Formulario para agregar un nuevo acuerdo -->
@@ -150,9 +145,42 @@
 
     <!------------------------------   MODAL   ---------------------------------------------->
 
+<!-- Modal -->
+<input type="checkbox" id="modal_acciones">
+<label for="modal_acciones" class="modal-background"></label>
 
+<div class="modal_acciones">
+  <div class="modal-header">
+      <h3>Detalles del Acuerdo</h3>
+      <label for="modal_acciones">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAdVBMVEUAAABNTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTU0N3NIOAAAAJnRSTlMAAQIDBAUGBwgRFRYZGiEjQ3l7hYaqtLm8vsDFx87a4uvv8fP1+bbY9ZEAAAB8SURBVBhXXY5LFoJAAMOCIP4VBRXEv5j7H9HFDOizu2TRFljedgCQHeocWHVaAWStXnKyl2oVWI+kd1XLvFV1D7Ng3qrWKYMZ+MdEhk3gbhw59KvlH0eTnf2mgiRwvQ7NW6aqNmncukKhnvo/zzlQ2PR/HgsAJkncH6XwAcr0FUY5BVeFAAAAAElFTkSuQmCC" width="16" height="16" alt="Cerrar">
+      </label>
+  </div>
+
+  <div class="form">
+
+      <p >
+          <input #asunto type="text" class="textb" [(ngModel)]="selectedAcuerdo.asunto" placeholder="Escribe el asunto">
+      </p>
+
+
+      <p >
+          <textarea #detalles  class="textb" style="height: 50px;" [(ngModel)]="selectedAcuerdo.detalles" placeholder="Escribe los detalles"></textarea>
+      </p>
+
+
+      <p >
+          <input type="date" #fecha  class="textb" [(ngModel)]="selectedAcuerdo.fecha">
+      </p>
+
+      <!-- Botones de Actualizar y Eliminar -->
+      <div class="form-actions" style="display: flex; margin-right: 100px;">
+          <button class="boton"  (click)="actualizarAcuerdo(selectedAcuerdo.id,asunto.value,detalles.value,fecha.value)">Actualizar</button>
+          <button class="boton" (click)="eliminarAcuerdo(selectedAcuerdo.id_acuerdo)">Eliminar</button>
+      </div>
+  </div>
+</div>
 
 </body>
-
 
 

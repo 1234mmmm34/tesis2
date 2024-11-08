@@ -17,7 +17,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { FraccionamientosComponent } from './fraccionamientos/fraccionamientos.component';
 import { PruebaComponent } from './prueba/prueba.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { PanelPrincipalAdminComponent } from './panel-principal-admin/panel-principal-admin.component';
 //import { AcuerdosComponent } from './acuerdos/acuerdos.component';
 //import { NotificacionesComponent } from './notificaciones/notificaciones.component';
@@ -78,7 +78,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'; // Impor
 import { MatInputModule } from '@angular/material/input'; // Importa MatInputModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditarCuentaComponent } from './editar-cuenta/editar-cuenta.component';
-//import { HomeUsuariosComponent } from './grupos/home-usuarios/home-usuarios.component';
+import { HomeUsuariosComponent } from './home-usuarios/home-usuarios.component';
 
 import { importProvidersFrom } from '@angular/core';
 import {provideStorage, getStorage} from '@angular/fire/storage'
@@ -94,7 +94,7 @@ import { PaseTemporalComponent } from './pase-temporal/pase-temporal.component';
     SideNavComponent,
     FraccionamientosComponent,
     PruebaComponent,
-    //HomeComponent,
+    HomeComponent,
     PanelPrincipalAdminComponent,
     //AcuerdosComponent,
     //NotificacionesComponent,
@@ -142,7 +142,7 @@ import { PaseTemporalComponent } from './pase-temporal/pase-temporal.component';
     GruposComponent,
     EditarCuentaComponent,
     PaseTemporalComponent,
-   // HomeUsuariosComponent
+    HomeUsuariosComponent
 
 
   ],

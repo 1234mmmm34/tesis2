@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ImageService {
 
    //private apiUrl = 'https://evaluacionesuas-001-site1.gtempurl.com/Acuerdos';
-   private apiUrl = 'http://159.54.141.160/api/Usuarios';
+   private apiUrl = 'https://localhost:44397/api/Usuarios';
 
    constructor(private http: HttpClient) { }
 

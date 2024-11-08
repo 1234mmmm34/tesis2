@@ -1,4 +1,3 @@
-
 <head>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -13,7 +12,7 @@
 
 </head>
 
- 
+
 <body>
 
     <div id="header">
@@ -30,105 +29,92 @@
 
     <div style="padding-left: 5%;">
 
-           
- 
+
+
 
 
         <div class="contenedor1">
-    
-         
-    
+
+
+
             <div id="buscar">
-    
+
                 <div id="columna1">
                     <label style="color: rgb(97, 94, 94); font-size: small;">
                         Tu total a pagar es de:
                     </label>
-    
-                    <h2>${{ total_deuda }}</h2>
+
+                    <h2>${{ total_deuda.toFixed(2) }} MXN</h2>
                 </div>
-    
-                <div id="columna2">
-                    <p>Pagar en línea con: </p>
-                    <button (click)="createPayment(200)" id="paypal-button"><img id="paypal" src="./pay.png"></button>
-    
-    
-            
-    
-    
-    
-    
-                </div>
-    
-    
-    
-                <div id="columna2">
-                    <p>Información de pago: </p>
-    
-                    <div>
-                        <label>Karina Aidee Galaviz Burgos</label>
-                        <label id="labelToCopy">1234123412341234 <img id="spei" src="./spei.png">
-    
-                            <button (click)=" copyLabelContent()"
-                                style="background: none; border: none; font-size: 20px; "><i
-                                    class="fa-regular fa-copy"></i></button>
-    
-                        </label>
-    
-                        <div class="notification" *ngIf="visible==true">
-                            texto copiado
-                        </div>
-                    </div>
-    
-    
-                </div>
-    
-    
-    
-    
-    
-    
+
             </div>
-    
-            <div class="contenedor2">
-    
-                    <label style="color: rgb(97, 94, 94); font-size: small;">
-                        últimos movimientos
-                    </label>
-    
-            </div>
+
+
+
+
+
+
         </div>
-    
-
-        
-
-        
-        <div class="contenedor3">
-            <label style="color: rgb(97, 94, 94); font-size: small;">
-                Generar y compartir código de uso único
-            </label>
-    
-            <div class="generar-container">
-                <button class="green-button" (click)="generarToken()">Generar</button>
-            </div>
-        
-            <div class="qr-container">
-                <img [src]="qrCodeDataUrl" alt="Presiona el Botón de Arriba para generar el código" #codigoQR>
-        
-                <p class="advertencia">Comparte solamente con la persona que necesita acceso. No compartas este código con desconocidos.</p>
-        
-                <button class="download-button" (click)="descargarCodigoQR()">Descargar</button>
-            </div>
-
-    
-        </div>
-
-        <div *ngIf="isBlocked" class="overlay">
-                <p class="bloqueado-mensaje">Esta sección se encuentra temporalmente bloqueada por el administrador de la comunidad, comunicate con él para más información</p>
-        </div>
-        
-          
  
+ 
+        <div class="contenedor2">
+
+            <label style="color: rgb(97, 94, 94); font-size: small;">
+                últimos movimientos
+            </label>
+
+            <table class="table" width="100%" *ngIf="this.movimientos.length>0; else noencontrado">
+                <tbody>
+                    <tr tr mat-row matRowDef="columns: displayedcolumns;"
+                        *ngFor="let mov of movimientos">
+                        <td>{{ mov.cadena }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ng-template #noencontrado>
+                <div class="div-noen">
+                    <img class="noencontrado"  src="./no.png" alt="hola">
+
+                </div>
+            </ng-template> 
+
+
+        </div>
+
+
+
+
+
+
+    <div class="contenedor3">
+        <label style="color: rgb(97, 94, 94); font-size: small;">
+            Generar y compartir código de uso único
+        </label>
+
+        <div class="generar-container" *ngIf="!isBlocked">
+            <button class="green-button" (click)="generarToken()">Generar</button>
+        </div>
+
+        <div class="qr-container" *ngIf="!isBlocked">
+            <img [src]="qrCodeDataUrl" alt="Presiona el Botón de Arriba para generar el código" #codigoQR>
+
+            <p class="advertencia">Comparte solamente con la persona que necesita acceso. No compartas este código con
+                desconocidos.</p>
+
+            <button class="download-button" (click)="descargarCodigoQR()">Descargar</button>
+        </div>
+
+
+    </div>
+
+    <div *ngIf="isBlocked" class="overlay">
+        <p class="bloqueado-mensaje">Esta sección se encuentra temporalmente bloqueada por el administrador de la
+            comunidad, comunicate con él para más información</p>
+    </div>
+
+
+
 
 
 

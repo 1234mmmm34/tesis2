@@ -37,7 +37,31 @@ export interface deudas {
 
         };
 
-
+        export interface deuda_enviada {
+            id_deuda: any;
+            comprobante: any;
+            monto: any;
+            id_fraccionamiento: any;
+            estado: any;
+            fecha: any;
+            subdeuda: any;
+            id_deudor: any;
+            recargo: any;
+          }
+          
+          export class deuda_enviada {
+            id_deuda: any;
+            comprobante: any;
+            monto: any;
+            id_fraccionamiento: any;
+            estado: any;
+            fecha: any;
+            subdeuda: any;
+            id_deudor: any;
+            recargo: any;
+          }
+          
+          
         
 export interface deudores {
     id_deuda: any;
@@ -71,6 +95,18 @@ export interface deudores {
             proyeccion_ingresos: any;
             mes: any;
             egresos: any;
+            };
+
+            
+        export interface movimientos {
+            cadena: any
+ 
+            };
+
+                        
+        export interface balance {
+            ingresos: any
+ 
             };
 
             export interface historial {

@@ -43,6 +43,9 @@ export class FraccionamientosComponent {
   home: any;
   id_fracc: any;
   cont: any;
+  ip: boolean = false;
+  encendido: boolean = false;
+
 
 
   constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private loadingService: LoadingService) {
@@ -69,11 +72,15 @@ export class FraccionamientosComponent {
   ngOnInit(): void {
     this.fetchDataHikvision(this.dataService.obtener_usuario(1));
     this.cambiarColorBoton();
+    this.encendido = this.dataService.obtener_usuario(9)
     document.addEventListener('DOMContentLoaded', function () {
-      // Aquí puedes inicializar cosas si es necesario
+
     });
 
-    
+    if(this.ipControlador!=""){
+      this.ip = true;
+    }
+
   this.nombreControlador = this.dataService.obtener_usuario(10);
   this.ipControlador = this.dataService.obtener_usuario(12);
 
@@ -129,8 +136,8 @@ export class FraccionamientosComponent {
             return false; // Devuelve false en caso de error
         }
 
-        
-      
+
+
 
     } catch (error) {
         // Manejo de errores de la solicitud
@@ -206,7 +213,7 @@ abrir_puerta(): void {
     this.controlador.user = controladores.user;
     this.controlador.password = controladores.password;
     this.controlador.ip = controladores.ip
-    
+
     if(controladores.port=="null"){
       controladores.port="0";
     }
@@ -234,12 +241,12 @@ abrir_puerta(): void {
       if (divElement !== null && divElement1 !== null) {
         divElement.style.display = 'block';
         divElement1.style.display = 'block';
-  
+
       }
 */
 
 
-  } 
+  }
 
   limpiar(){
     this.UserGroup.reset();
@@ -278,7 +285,7 @@ abrir_puerta(): void {
               icon: 'success',
               confirmButtonText: 'Aceptar'
             });
-            
+
 
         },
         (error) => {
@@ -300,7 +307,7 @@ abrir_puerta(): void {
 
     this.loadingService.show()
 
-   
+
 
     this.dataService.fetchDataHikvision(id_administrador).subscribe((controladores: controladores[]) => {
 

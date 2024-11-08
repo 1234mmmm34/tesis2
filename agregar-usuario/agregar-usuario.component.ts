@@ -34,8 +34,12 @@ export class AgregarUsuarioComponent {
   indice: number = 0;
   verdaderoRango: number = 6;
   cont: number = 1;
+  ip: boolean = false;
+  estado: string = "";
+  agregar: boolean = true;
+  nombre: string = "";
 
-  
+
 
   constructor(private http: HttpClient, private dataService: DataService, private fb: FormBuilder, private invitacionService: InvitacionService, private correoService: CorreoService, private loadingService: LoadingService) {
 
@@ -53,9 +57,9 @@ export class AgregarUsuarioComponent {
       confirmarContrasena: ['', Validators.required],
       id_fraccionamiento: ['', Validators.required]
 
-  
+
     })
-  
+
     this.UserGroup1 = this.fb.group({
       id_persona: ['', Validators.required],
       nombre: ['', Validators.required],
@@ -63,13 +67,20 @@ export class AgregarUsuarioComponent {
       apellido_mat: ['', Validators.required],
       telefono: ['', Validators.required],
       fecha_nacimiento: ['', Validators.required],
-      tipo_usuario: [null, Validators.required]
+      tipo_usuario: [null, Validators.required],
+      hikvision: ['', Validators.required],
+
+
     })
   }
 
   ngOnInit(): void {
 
     this.fetchDataUsers(this.dataService.obtener_usuario(3));
+
+    if(this.dataService.obtener_usuario(12)!=""){
+      this.ip = true;
+    }
 
 
     $(function () {
@@ -93,7 +104,19 @@ export class AgregarUsuarioComponent {
   }
 
 
-
+limpiar(){
+  this.UserGroup1.patchValue({
+    id_persona: '',
+    nombre: '',
+    apellido_pat: '',
+    apellido_mat: '',
+    telefono: '',
+    fecha_nacimiento: '',
+    tipo_usuario: null,
+    hikvision: ''
+  });
+  
+}
 
   fetchDataUsers(id_administrador: any) {
     //  console.log("id admiiiiiiiiiiiiiiiiiiiiiiin: " + id_administrador);
@@ -118,7 +141,7 @@ export class AgregarUsuarioComponent {
   correo_invitado1: string = '';
 
   enviarCorreo(correoDestinatario: string, mensaje: string): void {
-   
+
     this.correoService.Enviar_Correo(correoDestinatario, this.dataService.obtener_usuario(5) + " te ha invitado a unirte a su comunidad, da click en el enlace y llena el formulario.");
   }
 
@@ -155,7 +178,7 @@ export class AgregarUsuarioComponent {
     }
   }
 
-    mandar_correo(correo_invitado: any) {
+    mandar_correo(correo_invitado: string) {
 
 
       console.log("invitadooo: ",correo_invitado);
@@ -163,12 +186,12 @@ export class AgregarUsuarioComponent {
       console.log("nn: ",token, correo_invitado)
 
       var correo = correo_invitado;
-      this.invitacionService.generarInvitacion(token, correo_invitado[0].correo, this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(5), this.dataService.obtener_usuario(2), "usuario")
+      this.invitacionService.generarInvitacion(token, correo_invitado, this.dataService.obtener_usuario(3), this.dataService.obtener_usuario(5), this.dataService.obtener_usuario(2), "usuario")
         .subscribe(
           response => {
             console.log('Success:', response);
-            this.correoService.Enviar_Correo(correo_invitado, "haz sido invitado por tu administrador para unirte a una comunidad en linea\n por favor termina tu registro en el siguiente link: \n http://159.54.141.160/Student/Invitacion?token=" + token);
-            // this.enviarCorreo(correoElectronico, "haz sido invitado por tu administrador para unirte a una comunidad en linea\n por favor termina tu registro en el siguiente link: \n http://159.54.141.160:4200/Invitacion?token=" + token);
+            this.correoService.Enviar_Correo(correo_invitado, "haz sido invitado por tu administrador para unirte a una comunidad en linea\n por favor termina tu registro en el siguiente link: \n https://localhost:44397/Student/Invitacion?token=" + token);
+            // this.enviarCorreo(correoElectronico, "haz sido invitado por tu administrador para unirte a una comunidad en linea\n por favor termina tu registro en el siguiente link: \n https://localhost:44397:4200/Invitacion?token=" + token);
             Swal.fire({
               title: 'Invitacion enviada correctamente',
               text: '',
@@ -206,6 +229,10 @@ export class AgregarUsuarioComponent {
 
       if (usuario.contrasenia == usuario.confirmarContrasena) {
 
+        this.estado = "permitido"
+        if(this.dataService.obtener_usuario(12)==""){
+          this.estado = "N/A"
+        }
         const params = {
           nombre: usuario.nombre,
           apellido_pat: usuario.apellido_pat,
@@ -218,13 +245,13 @@ export class AgregarUsuarioComponent {
           id_fraccionamiento: this.dataService.obtener_usuario(3),
           id_administrador: this.dataService.obtener_usuario(3),
           id_lote: 1,
-          hikvision: "permitido"
+          hikvision: this.estado
 
           //  Intercomunicador: 123,
           //  Codigo_acceso: "123"
         };
 
-      //  let direccion = "http://159.54.141.160/api/Usuarios/Agregar_Usuario";
+      //  let direccion = "https://localhost:44397/api/Usuarios/Agregar_Usuario";
       let direccion = "https://localhost:44397/api/Usuarios/Agregar_Usuario";
 
         const headers = new HttpHeaders({ 'myHeader': 'procademy' });
@@ -236,7 +263,12 @@ export class AgregarUsuarioComponent {
             console.log(this.usuarios[0].fecha_nacimiento);
             this.fetchDataUsers(this.dataService.obtener_usuario(3));
 
-
+            Swal.fire({
+              title: 'Usuario agregado correctamente',
+              text: '',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            })
           });
       }
       else {
@@ -355,9 +387,20 @@ export class AgregarUsuarioComponent {
 
 
 
-    
-  seleccionar(usuario: any, nombre: any, apellido_pat: any, apellido_mat: any, telefono: any, tipo_usuario: any){
+
+  seleccionar(usuario: any, nombre: any, apellido_pat: any, apellido_mat: any, telefono: any, tipo_usuario: any, hikvision: any){
+    this.agregar = false;
+
     this.id_usuario = usuario;
+    this.nombre = nombre + " " + apellido_pat + " " + apellido_mat;
+
+
+
+    if(hikvision=="N/A"){
+      this.agregar = true;
+
+    }
+
 /*
     this.UserGroup1 = this.fb.group({
       id_persona: [usuario, Validators.required],
@@ -366,7 +409,7 @@ export class AgregarUsuarioComponent {
       apellido_mat: [apellido_mat, Validators.required],
       telefono: [telefono, Validators.required],
       fecha_nacimiento: ['', Validators.required],
-      tipo_usuario: [tipo_usuario, Validators.required] 
+      tipo_usuario: [tipo_usuario, Validators.required]
     })*/
 
       this.UserGroup1.patchValue({
@@ -395,7 +438,7 @@ export class AgregarUsuarioComponent {
         telefono: any
       }
     ) {
-    
+
       const params = {
         id_persona: usuario.id_persona,
         nombre: usuario.nombre,
@@ -404,21 +447,21 @@ export class AgregarUsuarioComponent {
         telefono: usuario.telefono,
         tipo_usuario: this.tipo_usuario,
 
-    
+
       };
-    
+
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       };
-    
+
       console.log("params  ", params);
-    
-    
+
+
       return this.http.put("https://localhost:44397/api/Personas/Actualizar_Persona_Admi", params).subscribe(
         (_response) => {
-    
+
           Swal.fire({
             title: 'Datos actualizados correctamente',
             text: '',
@@ -435,19 +478,19 @@ export class AgregarUsuarioComponent {
               // Puedes realizar acciones adicionales aquí
             }
           });
-    
-    
+
+
           console.log("hola");
           console.log("https://localhost:44397/api/Personas/Actualizar_Persona", params);
-    
-    
+
+
           this.ngOnInit();
-    
+
         }
       )
-        
+
     }
-    
+
 
 
     actualizar_tesorero(){
@@ -485,11 +528,55 @@ export class AgregarUsuarioComponent {
         })
 
 
-    
+
+
+
+
+
+      }
+
+
+
+
+    agregarPersonaHik(){
+
+      this.id_fracc = this.id_usuario;
+      this.tesorero = 'tesorero';
+
+
+      return this.http.put("https://localhost:44397/Hikvision/AgregarPersona?id_persona="+this.id_usuario+"&nombre="+this.nombre,1).subscribe(
+        () => {
+          Swal.fire({
+            title: 'Usuario agregado al panel de acceso',
+            text: '',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
+          this.fetchDataUsers(this.dataService.obtener_usuario(3));
+          window.location.reload();
+
+        },
+        (error) => {
+          console.error('Error al agregar usuario al panel de acceso:', error);
+          Swal.fire({
+            title: 'Error al agregar usuario al panel de acceso',
+            text: '',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          })
+          this.fetchDataUsers(this.dataService.obtener_usuario(3));
+          console.log("hola");
+          this.UserGroup.reset();
+
+
+
+        })
+
+
+
 
 
 
 
       }
     }
-  

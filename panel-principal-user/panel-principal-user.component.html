@@ -20,27 +20,6 @@
      <div style="background-color: transparent; width: 140px; height: 60px; border-radius: 80%; overflow: hidden; display: flex; align-items: center; position: relative; margin-left: 85%; padding-right: 40px;">
 
 
-     <div class="notification-drop" style="background-color: #f2f3f4; width: 40px; height: 40px; position: fixed; right: 77px; top:16px;transform: translateX(-50%); border-radius: 80%; border: 1px solid #101146;"></div>
-
-      <ul class="notification-drop">
-        <li class="item" style="margin-right: 100px;">
-          <mat-icon  matBadge="8+" matBadgeColor="warn" matBadgeSize="small" style=" transform: scale(1.5); -webkit-text-fill-color:#030542; position: relative; left: 75px;">circle_notifications</mat-icon>
-
-          <ul style="box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); overflow-y: auto;overflow-x: hidden; height: 300px; width: 350px;">
-
-            <div style="display: flex;  height: 10%;">
-              <p class="text-xs text-blue-600 cursor-pointer inline-block" style="margin-left: 10px; color: #030542; font-size: small;">Limpiar bandeja</p>
-              <p class="text-xs text-blue-600 cursor-pointer inline-block;" style="margin-left: 110px; color: #030542; font-size: small;">Marcar como leídos</p>
-            </div>
-
-            <li *ngFor="let notificacion of notificaciones1" style="font-size: small; white-space: pre-line; text-overflow: ellipsis; word-wrap: break-word; border-bottom: 0.5px solid rgb(217, 217, 224); height: 24%;">
-              {{ notificacion.mensaje }}
-              <span style="display: block; color: #151867; padding-bottom: 5px;">10 minutes ago</span>
-            </li>
-
-          </ul>
-        </li>
-      </ul>
 
       <img [src]="imagenURL" alt="Imagen" *ngIf="imagenURL !== ''" id="usuario"
            style="width: 50px; height: 50px; object-fit: contain; position: absolute; left: 63%; transform: translateX(-50%); border-radius: 80%; border: 1px solid #030542; background-color: #757575;">
@@ -65,7 +44,7 @@
             <p style="color: #757575;">{{Nav.name}}</p>
           </a>
 
-        </div>
+        </div> 
 
         <!--
         <ng-container *ngFor="let Nav of fillerNav; let i = index;">

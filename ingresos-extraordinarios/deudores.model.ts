@@ -14,6 +14,9 @@ export class Deudores {
         monto_restante: number;
         subdeuda: number;
         periodo: number;
+        aceptado: number;
+        comprobante: string;
+        dia_registro: string;
         constructor( 
             id_deudor: number,
             id_deuda: number,
@@ -29,7 +32,11 @@ export class Deudores {
             periodicidad:number,
             monto_restante: number,
             subdeuda: number,
-            periodo: number)
+            periodo: number,
+            aceptado: number,
+            comprobante: string,
+            dia_registro: string
+        )
             {
             this.id_deudor=id_deudor,
             this.id_deuda=id_deuda,
@@ -45,7 +52,11 @@ export class Deudores {
             this.periodicidad=periodicidad,
             this.monto_restante=monto_restante,
             this.subdeuda = subdeuda,
-            this.periodo = periodo
+            this.periodo = periodo,
+            this.aceptado = aceptado,
+            this.comprobante = comprobante,
+            this.dia_registro = dia_registro
+
     
             }
     }

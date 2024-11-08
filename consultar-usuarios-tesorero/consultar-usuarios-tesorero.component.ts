@@ -35,7 +35,7 @@ export class ConsultarUsuariosTesoreroComponent {
 
     delete(usuario: any) {
       this.id_fracc = usuario['id_persona'];
-      return this.http.delete("http://159.54.141.160/api/Usuario_lote/DeleteAllUser?id_usuario=" + this.id_fracc).subscribe(
+      return this.http.delete("https://localhost:44397/api/Usuario_lote/DeleteAllUser?id_usuario=" + this.id_fracc).subscribe(
         () => {
           Swal.fire({
             title: 'Usuario restringido correctamente',

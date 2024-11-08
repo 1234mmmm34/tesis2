@@ -59,13 +59,11 @@
   
         <div class="imagen">
           <img [src]="imagenSeleccionada" alt="Imagen seleccionada" *ngIf="imagenSeleccionada" width="250" height="250">
-  
         </div>
-  
+
         <div>
           <input type="file" (change)="handleInputFile($event)" accept="image/*" id="fileInput" style="display: none;">
           <button class="btn_imagen" onclick="document.getElementById('fileInput').click()">Actualizar Imagen</button>
         </div>
-  
       </div>
   </div>

@@ -11,9 +11,9 @@ import { usuarios } from '../modelos/grupos';
 export class PasarelaService {
 
 
-  constructor(private http: HttpClient) { } 
+  constructor(private http: HttpClient) { }
 
-  
+
   consultarPasarela(id_fraccionamiento: any): Observable<paypal[]> {
     return this.http.get<paypal[]>("https://localhost:44397/api/Pasarela/Consultar_Pasarela?id_fraccionamiento="+id_fraccionamiento);
   }
@@ -29,10 +29,10 @@ export class PasarelaService {
 
     const forms = {
         id_fraccionamiento: id_fraccionamiento,
-        modo: "sandbox", 
+        modo: "sandbox",
         url: formValues.url,
-        client_key: formValues.client_key,    
-        secret_key: formValues.secret_key     
+        client_key: formValues.client_key,
+        secret_key: formValues.secret_key
       };
 
       console.log(forms)
@@ -56,4 +56,3 @@ export class PasarelaService {
   }
 
 }
- 

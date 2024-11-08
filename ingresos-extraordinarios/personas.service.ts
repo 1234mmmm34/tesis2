@@ -20,8 +20,8 @@ export class PersonasService {
 
   consultarDeudoresExtraoridinarios(idFraccionamiento: number,idUsuario:number): Observable<Deudores[]> {
     const url = `${this.apiUrl}/Deudas/Consultar_DeudorExtraordinario?id_fraccionamiento=${idFraccionamiento}&id_usuario=${idUsuario}`;
-    
-    return this.http.get<Deudores[]>(url); 
+
+    return this.http.get<Deudores[]>(url);
   }
 
   consultarDeudorOrdinario(idFraccionamiento: number,idUsuario:number): Observable<Deudores[]> {
@@ -35,22 +35,35 @@ export class PersonasService {
   }
 
   consultarDeudoresUsuarios(idLote: number, estado: number): Observable<Deudores[]> {
-    
+
     const url = `${this.apiUrl}/Deudas/Consultar_DeudoresUsuario?id_deudor=${idLote}&estado=${estado}`;
     return this.http.get<Deudores[]>(url);
   }
 
   consultarDeudores(id_fraccionamiento: number, id_deudor: number): Observable<Deudores[]> {
-    
+
     const url = `${this.apiUrl}/Deudas/Consultar_Deudores?id_fraccionamiento=${id_fraccionamiento}&id_deudor=${id_deudor}`;
     return this.http.get<Deudores[]>(url);
   }
 
-  
+
   Consultar_DeudasPagadas(id_fraccionamiento: number, id_deudor: number): Observable<Deudores[]> {
-    
+
     const url = `${this.apiUrl}/Deudas/Consultar_HistorialDeudasUsuario?id_deudor=${id_deudor}&id_fraccionamiento=${id_fraccionamiento}`;
     return this.http.get<Deudores[]>(url);
   }
-  
+
+
+  Consultar_Solicitudes(id_fraccionamiento: number, id_deudor: number): Observable<Deudores[]> {
+
+    const url = `${this.apiUrl}/Deudas/Consultar_DeudaEnviadaUsuario?id_deudor=${id_deudor}&id_fraccionamiento=${id_fraccionamiento}`;
+    return this.http.get<Deudores[]>(url);
+  }
+
+  Actualizar_Solicitudes(id_deuda: number, subdeuda: number, id_deudor: number): Observable<Deudores[]> {
+    const url = "https://localhost:44397/api/Deudas/Actualizar_DeudasEnviadas?estado=1&id_deuda="+1+"&subdeuda="+1+"&id_deudor="+1;
+    return this.http.put<Deudores[]>(url,{});
+
+  }
+
 }

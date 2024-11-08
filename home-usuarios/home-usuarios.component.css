@@ -23,6 +23,16 @@ body {
 /*background-image: url("./spei.png");*/
 }
 
+
+ng-template{
+  background-image: url("./no.png");
+
+
+  
+}
+
+
+
 #paypal-button{
 background-color: #ffc43c;
 border-radius: 10px;
@@ -269,17 +279,6 @@ hr {
 
 
 
-table {
-  background-color: #ffffff;
-  position: absolute;
-  top: 300px;
-  width: 90%;
-  font: 1em sans-serif;
-  margin: auto;
-
-  border-collapse: collapse;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
 
 .pages {
   display: flex;

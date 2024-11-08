@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { fraccionamientos, controladores } from './modelos/fraccionamientos';
 import { sesion, sesions, usuarios } from './modelos/usuarios'
-import { deudas, deuda, deudores, graficas, entradas, historial } from "./modelos/deudas"
+import { deudas, deuda, deudores, graficas, entradas, historial, movimientos, balance } from "./modelos/deudas"
 import { lotes } from './modelos/propiedades';
 import { inquilinos } from './modelos/inquilinos';
 import { formatDate } from '@angular/common';
@@ -96,7 +96,7 @@ export class DataService {
     ];
     const today = new Date();
     return mes[today.getMonth()];
-  
+
   }
 
 
@@ -147,6 +147,10 @@ export class DataService {
 
   fetchDataHistorialDeudas(id_fraccionamiento: any): Observable<historial[]> {
     return this.http.get<historial[]>('https://localhost:44397/api/Deudas/Consultar_HistorialDeudas?id_fraccionamiento=' + id_fraccionamiento);
+  }
+
+  fetchDataDeudasPendientes(id_fraccionamiento: any): Observable<historial[]> {
+    return this.http.get<historial[]>('https://localhost:44397/api/Deudas/Consultar_DeudaEnviada?id_fraccionamiento=' + id_fraccionamiento);
   }
 
 
@@ -208,14 +212,28 @@ export class DataService {
     return this.http.delete(url);
   }
 
+  consultar_movimientos(id_deudor: any): Observable<movimientos[]> {
+    let direccion = `https://localhost:44397/api/Deudas/Consultar_UltimosMovimientos?id_deudor=`+id_deudor;
+    return this.http.get<movimientos[]>(direccion);
+  }
 
+  consultar_movimientosAdmi(id_fraccionamiento: any): Observable<movimientos[]> {
+    let direccion = `https://localhost:44397/api/Deudas/Consultar_UltimosMovimientosAdmi?id_fraccionamiento=`+id_fraccionamiento;
+    return this.http.get<movimientos[]>(direccion);
+  }
+
+
+  consultar_balance(id_fraccionamiento: any): Observable<balance[]> {
+    let direccion = `https://localhost:44397/api/Deudas/Consultar_Balance?id_fraccionamiento=`+id_fraccionamiento;
+    return this.http.get<balance[]>(direccion);
+  }
 
   /*
     conexion_hikvision(user: string, password: string, port: string, ip: string){
     let direccion = "https://localhost:44397/Sesion/Conexion_Hikvision?ip="+this.obtener_usuario(9)+"&password="+this.obtener_usuario(11)+"&port="+this.obtener_usuario(10)+"&user="+this.obtener_usuario(12);
     return this.http.get<boolean>(direccion);
     }
-  
+
   */
   fecha(date: Date) {
     return formatDate(date, 'yyyy-MM-dd', 'en-US');

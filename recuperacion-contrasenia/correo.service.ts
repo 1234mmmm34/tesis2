@@ -9,7 +9,7 @@ export class CorreoService {
 
   Enviar_Correo(correo_destinatario: string, mensaje: string){
     emailjs.send("service_jw5uhit","template_anvzzmo",{
-      from_name: "Arboledas Administración",
+      from_name: "Student Administración",
       to_name: "A quien corresponda",
       message: mensaje,
       reply_to: "none",

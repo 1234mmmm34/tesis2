@@ -13,29 +13,29 @@
     <p id="descripcion">Agrega tus entradas de dinero y administra tus finanzas. </p>
   </div>
 
- 
 
+ 
 
 
   <div class="contenedor" *ngIf="mostrarGrid">
     <div id="buscar">
 
       <select class="select-deuda" [(ngModel)]="tipo_formulario" (change)="onChangeSelection($event)">
-        <option value="" disabled selected>-- Selecciona el tipo de deuda --</option>
-        <option value="">Deudas ordinarias</option>
-        <option value="extraordinario">Deudas extraordinarias</option>
+        <option value="0" selected>Historial de ingresos</option>
+        <option value="1">Solicitud de deudas</option>
       </select>
 
       <button class="help-button" (mouseover)="showHelp=true" (mouseout)="showHelp=false">?</button>
       <span *ngIf="showHelp" class="help-message">Las deudas ordinarias consisten en todas aquellas que tienen que ser
         liquidas periodicamente; si son deudas extraordinarias, hablamos de deudas de pago único.</span>
 
-        <div style="display: flex; align-items: center; width: 300px; margin-left: 150%;">
-          <mat-icon (click)="reporteIngresos()" style="font-size: 34px; padding-right: 10px; width: 50px; height: 50px; padding-top: 10px;">assignment_returned</mat-icon>
-          <label for="modal" class="boton" (click)="limpiar()" style="margin-left: 10px;">Agregar</label>
-        </div>
-        
-        
+      <div style="display: flex; align-items: center; width: 300px; margin-left: 150%;">
+        <mat-icon (click)="reporteIngresos()"
+          style="font-size: 34px; padding-right: 10px; width: 50px; height: 50px; padding-top: 10px;">assignment_returned</mat-icon>
+        <label for="modal" class="boton" (click)="limpiar()" style="margin-left: 10px;">Agregar</label>
+      </div>
+
+
 
 
 
@@ -43,62 +43,72 @@
     </div>
   </div>
 
-    <div id="contenedor2" *ngIf="this.historial1.length>0; else noencontrado">
-      <table id="example" class="table" cellspacing="0">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Deudor</th>
-            <th class="fecha" style="width: 350px;">Descripción</th>
-            <th>Monto</th>
-            <th>Recargo aplicado</th>
-            <th>Estado</th>
-            <th>Fecha</th>
-            <th>Comprobante</th>
-            <th>Generar recibo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr mat-row matRowDef="columns: displayedcolumns;" *ngFor="let hist of historial1; let j=index"
-            (click)="onRowClicked(deuda)">
-            <th scope="row">{{hist.id_deuda}}</th>
-            <td>{{hist.nombre_persona}}</td>
-            <td class="fecha">{{hist.nombre_deuda}}</td>
-            <td>${{hist.monto}} MXN</td>
-            <td>${{hist.recargo}} MXN</td>
-            <td *ngIf="hist.estado=='pagado'" style="color: green">
-              {{ hist.estado }}
-            </td>
-            <td *ngIf="hist.estado=='abono'" style="color: rgb(69, 64, 10)">
-              {{ hist.estado }}
-            </td>
-            <td class="fecha">{{ hist.dia_registro | date:'dd/MM/yyyy' }}</td>
-            <td>
-              <a href="{{hist.comprobante}}" style="text-decoration: none;" target="_blank">
+  <div id="contenedor2" *ngIf="this.historial1.length>0; else noencontrado">
+    <table id="example" class="table" cellspacing="0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Deudor</th>
+          <th class="fecha" style="width: 350px;">Descripción</th>
+          <th>Monto</th>
+          <th>Recargo aplicado</th>
+          <th *ngIf="!op">Estado</th>
+          <th>Fecha</th>
+          <th>Comprobante</th>
+          <th *ngIf="!op">Generar recibo</th>
+          <th *ngIf="op">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mat-row matRowDef="columns: displayedcolumns;" *ngFor="let hist of historial1; let j=index"
+          (click)="onRowClicked(deuda)">
+          <th scope="row">{{hist.id_deuda}}</th>
+          <td>{{hist.nombre_persona}}</td>
+          <td class="fecha">{{hist.nombre_deuda}}</td>
+          <td>${{hist.monto}} MXN</td>
+          <td>${{hist.recargo}} MXN</td>
+          <td *ngIf="hist.estado=='pagado'" style="color: green">
+            {{ hist.estado }}
+          </td>
+          <td *ngIf="hist.estado=='abono'" style="color: rgb(69, 64, 10)">
+            {{ hist.estado }}
+          </td>
+          <td class="fecha">{{ hist.dia_registro | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <a href="{{hist.comprobante}}" style="text-decoration: none;" target="_blank">
               <button type="button" id="view-button">
                 <mat-icon style="font-size:large; font-weight: bolder;text-decoration: none;">file_open</mat-icon>
               </button>
-              </a>
-            </td>
-            <td>
-              <a style="text-decoration: none;" target="_blank">
+            </a>
+          </td>
+          <td *ngIf="!op">
+            <a style="text-decoration: none;" target="_blank">
               <button type="button" id="view-button" (click)="Generar_Recibo(hist.id)">
                 <mat-icon style="font-size:large; font-weight: bolder;text-decoration: none;">file_open</mat-icon>
               </button>
-              </a>
-            </td>
-          </tr>
+            </a>
+          </td>
 
-        </tbody>
-      </table>
+          <td *ngIf="op">
+            <a style="text-decoration: none; text-align: center; display: flex; gap: 10px;">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="done" (click)="ClickDeuda(hist); comprobante(hist.comprobante); pagarDeudaExtraordinaria(hist.monto,1);"></mat-icon>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="clear" (click)="ClickDeuda(hist); Actualizar_Solicitudes(hist.id);"></mat-icon>
+            </a>
+          </td>
+          
+
+        </tr>
+
+      </tbody>
+    </table>
 
 
-      <div class="pages">
-        <mat-paginator [length]="historial.length" [pageSize]="verdaderoRango" [pageSizeOptions]="[5, 10, 25, 100]"
-          aria-label="Select page" (page)="pageChanged($event)">
-        </mat-paginator>
-      </div>
+    <div class="pages">
+      <mat-paginator [length]="historial.length" [pageSize]="verdaderoRango" [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page" (page)="pageChanged($event)">
+      </mat-paginator>
     </div>
+  </div>
 
 
 
@@ -150,21 +160,23 @@
 
 
             <p>
-              <select id="usuarioExtra" name="usuarioExtra" required formControlName="usuarioExtra" (change)="onChangeUsuario($event)">
+              <select id="usuarioExtra" name="usuarioExtra" required formControlName="usuarioExtra"
+                (change)="onChangeUsuario($event)">
                 <option value='null' disabled selected>-- Selecciona un usuario --</option>
                 <option *ngFor="let usuario of personas" [value]="usuario.id_persona">
                   {{ usuario.nombre }} {{ usuario.apellido_pat }} {{ usuario.apellido_mat }}
                 </option>
               </select>
             </p>
-            
+
 
 
             <p>
-              <select #deudaExtra id="deudaExtra" name="deudaExtra" formControlName="deudaExtra" required ngModel (change)="onChangeDeuda($event)">
+              <select #deudaExtra id="deudaExtra" name="deudaExtra" formControlName="deudaExtra" required ngModel
+                (change)="onChangeDeuda($event)">
                 <option value='null' hidden selected>-- Selecciona una deuda --</option>
                 <option *ngFor="let deuda of deudasDelUsuario" value="{{deuda.id_deuda}}">
-                   {{deuda.nombre_deuda}}
+                  {{deuda.nombre_deuda}}
                 </option>
               </select>
             </p>
@@ -197,18 +209,20 @@
 
             <p>
               <input type="file" (change)="handleInputFile($event)" accept=".pdf" id="fileInput" style="display: none;">
-              <button class="boton-verde" onclick="document.getElementById('fileInput').click()">Cargar Comprobante</button>
+              <button class="boton-verde" onclick="document.getElementById('fileInput').click()">Cargar
+                Comprobante</button>
             </p>
             <p>
-              <span *ngIf="archivoSeleccionado">{{ archivoSeleccionado?.name }}</span> <!-- Solo el nombre del archivo -->
+              <span *ngIf="archivoSeleccionado">{{ archivoSeleccionado?.name }}</span>
+              <!-- Solo el nombre del archivo -->
             </p>
             <!--btn_imagen-->
             <p>
-              <button class="boton-verde" (click)="pagarDeudaExtraordinaria(montoDeudaExtra.value)">Pagar</button>
+              <button class="boton-verde" (click)="pagarDeudaExtraordinaria(montoDeudaExtra.value,0)">Pagar</button>
             </p>
           </form>
 
-        
+
 
         </div>
 

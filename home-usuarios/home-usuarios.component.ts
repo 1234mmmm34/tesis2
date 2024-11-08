@@ -12,6 +12,7 @@ import { LoadingService } from '../loading-spinner/loading-spinner.service';
 import * as QRCode from 'qrcode';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { movimientos } from '../modelos/deudas';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HomeUsuariosComponent {
 
  // @ViewChild('codigoQR') codigoQR!: ElementRef<HTMLImageElement>;
 
-  //paypal: paypal[] = [];
+  movimientos: movimientos[] = [];
   total_deuda: number = 0;
  hikvision: string = this.dataservice.obtener_usuario(13);
  token:string='';
@@ -39,8 +40,10 @@ export class HomeUsuariosComponent {
   nombre: any = this.dataservice.obtener_usuario(8);
   mes: any = "";
   isBlocked: boolean = false;
- 
+
   ngOnInit(): void {
+
+    this.consultarMovimientos();
 
     if(this.dataservice.obtener_usuario(15) == 'permitido'){
       this.isBlocked=false;
@@ -58,8 +61,26 @@ export class HomeUsuariosComponent {
 
   }
 
+
+  consultarMovimientos(): void {
+
+
+    this.dataservice.consultar_movimientos(this.dataservice.obtener_usuario(1)).subscribe(
+      (data: movimientos[]) => {
+
+        this.movimientos = data;
+
+        console.log(this.movimientos)
+
+      });
+
+
+
+  }
+
+
   consultarTotalDeuda(id_persona: number): void {
-    const apiUrl = `http://159.54.141.160/api/Deudas/Consultar_TotalDeuda?id_persona=${id_persona}`;
+    const apiUrl = `https://localhost:44397/api/Deudas/Consultar_TotalDeuda?id_persona=${id_persona}`;
 
     this.http.get<number>(apiUrl).subscribe(
       (resultado) => {
@@ -73,7 +94,6 @@ export class HomeUsuariosComponent {
       }
     );
   }
-
 
   copyLabelContent() {
     const label = document.getElementById('labelToCopy');
@@ -131,15 +151,11 @@ export class HomeUsuariosComponent {
 
 
 
-    
+
   generarToken() {
-    if(this.dataservice.obtener_usuario(15) == 'deshabilitado'){
-      this.isBlocked=false;
-    }else{
-      this.isBlocked=true;
-      //this.mostrarMensajeBloqueo();
-      return;
-    }
+    if(this.dataservice.obtener_usuario(15) != 'denegado'){
+
+
 
       this.accesoPuerta.generarToken(this.dataservice.obtener_usuario(1)).subscribe(
         (token: string) => {
@@ -151,11 +167,21 @@ export class HomeUsuariosComponent {
           console.error('Error al generar token', error);
         }
       );
+    }
+    else{
+      Swal.fire({
+        title: 'Acceso Restringido',
+        text: 'No tienes permiso para acceder a esta página.',
+        icon: 'error', // Icono de error
+        confirmButtonText: 'Aceptar', // Texto del botón
+        timer: 5000, // El mensaje se cerrará después de 5 segundos (opcional)
+    });
+    }
 
 
   }
 
-  
+
   ObtenerToken():boolean{
     this.accesoPuerta.consultarToken(this.dataservice.obtener_usuario(1)).subscribe(
       (token: string) => {
@@ -173,9 +199,9 @@ export class HomeUsuariosComponent {
     return false;
   }
 
-  
+
   construirQr(){
-    this.enlaceConstruido=`http://159.54.141.160/Student/PaseTemporal?token=${this.token}`;
+    this.enlaceConstruido=`https://localhost:44397/Student/PaseTemporal?token=${this.token}`;
     QRCode.toDataURL(this.enlaceConstruido, (err: any, url: string) => {
       if (err) {
         console.error('Error generando el QR:', err);
@@ -211,7 +237,7 @@ export class HomeUsuariosComponent {
     });
   }
 
-  
+
   mostrarMensajeBloqueo() {
     if (this.isBlocked) {
         Swal.fire({

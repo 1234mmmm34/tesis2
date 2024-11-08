@@ -36,7 +36,7 @@ export class PaypalComponent {
   ngOnInit(){
    this.ConsultarPasarela(this.dataService.obtener_usuario(1))
   }
-  
+
   AgregarPasarela(formValues: any){
 
     this.loadingService.show()
@@ -46,7 +46,7 @@ export class PaypalComponent {
 
     const headers = new HttpHeaders({'myHeader': 'procademy'});
     this.http.post("https://localhost:44397/api/Pasarela/Agregar_Pasarela?id_fraccionamiento="+this.dataService.obtener_usuario(1)+"&url="+formValues.url+"&client_key="+formValues.client_key+"&secret_key="+formValues.secret_key, {headers: headers})
-      .subscribe((res) => { 
+      .subscribe((res) => {
         this.loadingService.hide()
 
         Swal.fire({
@@ -60,7 +60,7 @@ export class PaypalComponent {
 
         //this.grupo.resetForm();
       });
-   
+
   }
 
   ConsultarPasarela(id_fraccionamiento: any){
@@ -73,12 +73,12 @@ export class PaypalComponent {
       this.loadingService.hide()
 
       this.paypal = paypal;
- 
+
       this.UserGroup = this.fb.group({
         url: [this.paypal[0].url, Validators.required],
         secret_key: [this.paypal[0].secret_key, Validators.required],
         client_key: [this.paypal[0].client_key, Validators.required]
-  
+
       })
 
       if(this.paypal.length!=null){
@@ -89,7 +89,7 @@ export class PaypalComponent {
       }
 
 
-      }, 
+      },
       (error) => {
         // Manejo de errores
         console.error('Error:', error);
@@ -98,7 +98,7 @@ export class PaypalComponent {
   }
 
 
-  
+
   actualizarPasarela(formValues: any): void {
 
     this.pasarelaService.actualizarPasarela(this.dataService.obtener_usuario(1), formValues)
@@ -113,7 +113,7 @@ export class PaypalComponent {
               icon: 'success',
               confirmButtonText: 'Aceptar'
             });
-            
+
 
         },
         (error) => {

@@ -86,12 +86,13 @@ const routes: Routes = [
   {
     path: 'PanelAdmin', component: PanelPrincipalAdminComponent,
     children: [
+      { path: '', component: HomeComponent },
       { path: 'Home', component: HomeComponent },
       //{path:'PanelAdmin', component:PanelPrincipalAdminComponent},
       //  {path:'Acuerdos', component:AcuerdosComponent},
       // {path:'Notificaciones', component:NotificacionesComponent},
       // {path:'Notificaciones', component:NotificacionesComponent},
-      { path: 'Notificaciones', component: ConsultarNotificacionesComponent },
+      { path: 'Notificaciones_usuarios', component: NotificacionesUsuariosComponent },
       { path: 'Acuerdos', component: ConsultarAcuerdosComponent },
       { path: 'ConsultarPropiedades', component: ConsultarPropiedadesComponent },
       { path: 'Inquilinos', component: InquilinosComponent },
@@ -114,7 +115,7 @@ const routes: Routes = [
         {path:'AgregarUsuario', component:AgregarUsuarioComponent}
       ]},
       */
-      { 
+      {
         path: "Configuracion", component: CuentaComponent
         , children: [
           { path: "", component: EditarCuentaComponent },
@@ -136,11 +137,13 @@ const routes: Routes = [
   {
     path: 'PanelTesorero', component: PanelPrincipalTesoreroComponent,
     children: [
-    //  { path: 'Home', component: HomeComponent },
+      { path: '', component: HomeComponent },
+      { path: 'Home', component: HomeComponent },
       { path: 'Deudas', component: DeudasComponent },
       { path: 'DeudasExtraordinarias', component: DeudasExtraordinariasComponent },
       { path: 'ConsultarDeudas', component: ConsultarDeudasComponent },
       { path: 'Deudores', component: DeudoresComponent },
+      { path: 'Notificaciones_usuarios', component: NotificacionesUsuariosComponent },
       { path: 'Egresos', component: EgresosComponent },
       { path: 'Ingresos', component: IngresosComponent },
      // { path: 'IngresosExtraordinarios', component: IngresosExtraordinariosComponent },
@@ -165,6 +168,7 @@ const routes: Routes = [
   {
     path: 'PanelUser', component: PanelPrincipalUserComponent,
     children: [
+      { path: "", component: HomeUsuariosComponent },
       { path: 'PanelUsuarios', component: HomeUsuariosComponent },
       { path: 'Notificaciones_usuarios', component: NotificacionesUsuariosComponent },
       { path: 'MisDeudas', component: MisDeudasComponent },

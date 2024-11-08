@@ -15,13 +15,13 @@ export class DeudaService {
 
   consultarDeudoresOridinarios(idFraccionamiento: number,idUsuario:number): Observable<Deudores[]> {
     const url = `${this.apiUrl}/Consultar_DeudoresOrdinarios?id_fraccionamiento=${idFraccionamiento}&id_usuario=${idUsuario}`;
-    
+
     return this.http.get<Deudores[]>(url);
   }
 
   consultarDeudoresExtraoridinarios(idFraccionamiento: number,idUsuario:number): Observable<Deudores[]> {
     const url = `${this.apiUrl}/Consultar_DeudorExtraordinario?id_fraccionamiento=${idFraccionamiento}&id_usuario=${idUsuario}`;
-    
+
     return this.http.get<Deudores[]>(url);
   }
 

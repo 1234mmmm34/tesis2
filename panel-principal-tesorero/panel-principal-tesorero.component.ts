@@ -14,7 +14,7 @@ import { Notificaciones } from '../modelos/notificaciones';
 })
 export class PanelPrincipalTesoreroComponent {
   imagen: any;
-  
+
   indice: number = 0;
   verdaderoRango: number = 6;
   cont: number = 1;
@@ -31,11 +31,13 @@ fillerNav=[
    {name:"Agregar Deudas", route:"Deudas", icon:""},
    {name:'Consultar Deudas', route:'ConsultarDeudas', icon:''},
   ]},*/
+  {name:"Home", route:"Home", icon:"home"},
+  // { name: "Notificaciones", route: "Notificaciones_usuarios", icon: "priority_high" },
   {name:'Deudas', route:'Deudas', icon:'list_alt'},
   {name:"Movimientos", route:"", icon:"border_color",children:[
     {name:"Ingresos", route:"Ingresos", icon:""},
     {name:"Egresos", route:"Egresos", icon:""}
-   ]},   
+   ]},
   {name:"Deudores", route:"Deudores", icon:"report_problem"},
  /* {name:"Egresos", route:"Egresos", icon:"call_received"},
   {name:"Ingresoss", route:"Ingresos", icon:"call_made"},
@@ -74,16 +76,16 @@ fillerNav1 = [
 Nav: any;
 usuario: any;
 
-    
+
 
   constructor(private NotificacionesService: NotificacionesService,changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private data: DataService, private imagenService: ImagenService,private router:Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-   
+
   }
 
- 
+
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -117,7 +119,7 @@ usuario: any;
       this.imagenURL = reader.result as string;
     }, false);
 
-    if (image) { 
+    if (image) {
       reader.readAsDataURL(image);
     }
   }
@@ -133,13 +135,13 @@ usuario: any;
   }
 
 
-  
+
   consultarNotificacion(idFraccionamiento: any, indice: number, verdaderoRango: number, id_destinatario: number) {
 
 
     this.NotificacionesService.consultarNotificacion(idFraccionamiento, id_destinatario).subscribe((notificaciones: Notificaciones[]) => {
 
-      
+
       this.notificaciones = notificaciones;
       this.indice = 0;
       this.verdaderoRango = 6;

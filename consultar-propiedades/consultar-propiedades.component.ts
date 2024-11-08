@@ -234,7 +234,7 @@ constructor(private router:Router, private http: HttpClient, private dataService
 
       console.log("params: ",params)
 
-      let direccion = "http://159.54.141.160/api/Usuario_lote/Agregar_inquilino";
+      let direccion = "https://localhost:44397/api/Usuario_lote/Agregar_inquilino";
 
       const headers = new HttpHeaders({ 'myHeader': 'procademy' });
       this.http.post(
@@ -283,7 +283,7 @@ constructor(private router:Router, private http: HttpClient, private dataService
     }
 
     eliminarAcuerdo(id_usuario_lote: any, codigo_acceso: any) {
-      return this.http.delete(`http://159.54.141.160/api/Usuario_lote/Eliminar_inquilino?id_lote=${id_usuario_lote}&codigo_acceso=${codigo_acceso}`,{ responseType: 'text' });
+      return this.http.delete(`https://localhost:44397/api/Usuario_lote/Eliminar_inquilino?id_lote=${id_usuario_lote}&codigo_acceso=${codigo_acceso}`,{ responseType: 'text' });
     }
 
 

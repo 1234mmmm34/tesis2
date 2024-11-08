@@ -264,7 +264,7 @@ export class DeudasComponent {
 
     const headers = new HttpHeaders({ 'myHeader': 'procademy' });
     this.http.post(
-      "http://159.54.141.160/api/Deudas/Agregar_Deuda",
+      "https://localhost:44397/api/Deudas/Agregar_Deuda",
       params, { headers: headers })
       .subscribe((res) => {
         console.log(res);
@@ -292,7 +292,7 @@ export class DeudasComponent {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.delete("http://159.54.141.160/api/Deudas/Eliminar_Deuda?id_deudas=" + id_deuda).subscribe(
+        this.http.delete("https://localhost:44397/api/Deudas/Eliminar_Deuda?id_deudas=" + id_deuda).subscribe(
           () => {
             Swal.fire({
               title: 'Deuda eliminada correctamente',
@@ -364,7 +364,7 @@ export class DeudasComponent {
 
     console.log("actualizar: ", params)
 
-    return this.http.put("http://159.54.141.160/api/Deudas/Actualizar_Deuda", params).subscribe(
+    return this.http.put("https://localhost:44397/api/Deudas/Actualizar_Deuda", params).subscribe(
       (_response) => {
         console.log("actualiza", params)
         this.ngOnInit();
@@ -377,7 +377,7 @@ export class DeudasComponent {
 
 
   delete(id_deudas: any) {
-    return this.http.delete("http://159.54.141.160/api/Deudas/Eliminar_Deuda?id_deudas=" + id_deudas).subscribe(
+    return this.http.delete("https://localhost:44397/api/Deudas/Eliminar_Deuda?id_deudas=" + id_deudas).subscribe(
       () => {
         this.fetchDataDeudas(this.dataService.obtener_usuario(3),1);
 
@@ -423,7 +423,7 @@ export class DeudasComponent {
 
     const headers = new HttpHeaders({ 'myHeader': 'procademy' });
     this.http.post(
-      "http://159.54.141.160/api/Deudas/Agregar_DeudaExtra",
+      "https://localhost:44397/api/Deudas/Agregar_DeudaExtra",
       params, { headers: headers })
       .subscribe((res) => {
         Swal.fire({
@@ -464,7 +464,7 @@ export class DeudasComponent {
 
     console.log("actualizar: ", params)
 
-    return this.http.put("http://159.54.141.160/api/Deudas/Actualizar_Deuda", params).subscribe(
+    return this.http.put("https://localhost:44397/api/Deudas/Actualizar_Deuda", params).subscribe(
       (_response) => {
         console.log("actualiza", params)
         this.ngOnInit();
@@ -484,7 +484,7 @@ export class DeudasComponent {
   }
 
 
-  apiUrl:string = 'http://159.54.141.160/Reportes/Reporte_Deudas';
+  apiUrl:string = 'https://localhost:44397/Reportes/Reporte_Deudas';
   tipo_deuda:string='';
   reporteDeudas(){
     this.loadingService.show();

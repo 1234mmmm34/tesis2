@@ -21,12 +21,13 @@
 
             <input type="text" name="filtrar" placeholder="buscar" id="buscar2" [(ngModel)]="filtroDeudores">
 
-            <select id="tipoDeuda" (change)="onChange($event)" id="buscar1">
-                <option [ngValue]=2 [disabled]="true">-- Estado de la deuda --</option>
-                <option value="0">Todas</option>
+            <select id="tipoDeuda" [(ngModel)]="selectedValue" (change)="onChange($event)" id="buscar1">
+                <option [ngValue]="1" [disabled]="true">-- Estado de la deuda --</option>
                 <option value="1">Pagada</option>
                 <option value="2">No pagada</option>
-            </select>
+                <option value="3">Mis solicitudes de pago</option>
+              </select>
+              
 
             <!--
                         <input type="date" name="filtrarFecha" id="buscar1"> 
@@ -37,21 +38,24 @@
 
         </div>
 
-        <div class="contenedor2">
+        <div class="contenedor2" *ngIf="this.Deudores_totales.length>0; else noencontrado">
 
             <table class="table" width="100%">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tipo de Deuda</th>
-                        <th>Nombre de Deuda</th>
+                        <th *ngIf="selectedValue!='3'">Tipo de deuda</th>
+                        <th>Concepto</th>
                         <th>Monto</th>
-                        <th *ngIf="selectedValue=='1'">Fecha de pago</th>
+                        <th *ngIf="selectedValue!='2'">Fecha de pago</th>
                         <th *ngIf="selectedValue=='2'">Periodicidad</th>
                         <th *ngIf="selectedValue=='2'">Retraso (dias)</th>
                         <th>Recargo</th>
                         <th>Total</th>
-                        <th>Acciones y ver más</th>
+                        <th *ngIf="selectedValue!='2'">Comprobante</th>
+                        <th *ngIf="selectedValue=='3'">Estado</th>
+                        
+                        <th *ngIf="selectedValue=='2'">Acciones y ver más</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,11 +63,15 @@
                         *ngFor="let deudor of Deudores_totales2; let i = index"
                         [ngClass]="{ 'row-red': calcularDiasRetraso(deudor.proximo_pago, deudor.periodicidad) > 0 }">
                         <th scope="row">{{ i + 1 }}</th>
-                        <td>{{ deudor.tipo_deuda }}</td>
+                        <td *ngIf="selectedValue!='3'">{{ deudor.tipo_deuda }}</td>
                         <td>{{ deudor.nombre_deuda }}</td>
                         <td>${{ deudor.monto_restante }} MXN</td>
+                        <td style="display: none;">{{ deudor.subdeuda }} MXN</td>
                         <td *ngIf="selectedValue=='1'">
                             {{ deudor.periodo | date:'dd/MM/yyyy'}}
+                        </td>
+                        <td *ngIf="selectedValue=='3'">
+                            {{ deudor.dia_registro | date:'dd/MM/yyyy'}}
                         </td>
                         <td *ngIf="selectedValue=='2'">{{ deudor.periodicidad === 0 ? '-' : deudor.periodicidad }}</td>
                         <td *ngIf="selectedValue=='2'"
@@ -74,7 +82,19 @@
                             '$'+deudor.recargo+' MXN'}}</td>
                         <td>${{calcularTotal(calcularDiasRetraso(deudor.proximo_pago,deudor.periodicidad),
                             deudor.monto_restante, deudor.recargo)}} MXN</td>
-                        <td style="padding-left: 4%;"><label for="modal" (click)="pagar(deudor)"><mat-icon style="font-size:medium;">visibility</mat-icon> </label> </td>
+                            <th *ngIf="selectedValue!='2'">
+                                <a  href="{{deudor.comprobante}}" style="text-decoration: none;" target="_blank">
+                                    <button type="button" id="view-button">
+                                      <mat-icon style="font-size:large; font-weight: bolder;text-decoration: none;">file_open</mat-icon>
+                                    </button>
+                                  </a>
+                            </th>
+                        <th *ngIf="selectedValue=='3' && deudor.aceptado==0">Revisión pendiente</th>
+                        <th *ngIf="selectedValue=='3' && deudor.aceptado==1" style="color: rgb(32, 108, 40);">Pago aceptado</th>
+                        <th *ngIf="selectedValue=='3' && deudor.aceptado==2" style="color: rgb(108, 35, 32);">Rechazado</th>
+                        
+                        <td *ngIf="selectedValue=='2'" style="padding-left: 4%;"><label for="modal" (click)="edit(deudor)"><mat-icon
+                                    style="font-size:medium;">visibility</mat-icon> </label> </td>
                     </tr>
                 </tbody>
             </table>
@@ -84,20 +104,20 @@
                     [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page" (page)="pageChanged($event)">
                 </mat-paginator>
             </div>
-        </div> 
+        </div>
 
-        <ng-template #noencontrado>
-            <div class="div-noen">
-                <img class="noencontrado" src="./no-en2.jpg">
-                <p>holaaa</p>
-            </div>
+        
+    <ng-template #noencontrado>
+        <div class="div-noen">
+            <img class="noencontrado" src="./no-en1.jpg">
+        </div>
 
-        </ng-template>
+    </ng-template>
+
     </div>
 
 
 
- 
 
 
 
@@ -135,8 +155,25 @@
                     <!-- Formulario para agregar una nueva deuda ordinaria -->
                     <form id="formCrear" class="Formulario" #form="ngForm">
 
+                        <p style="margin-right: 85px; text-align: center; margin-top: 30px;">
+                            Sube tu comprobante y espera respuesta de tu tesorero
+                        </p>
+
                         <p>
-                            <button (click)="createPayment()" id="paypal-button"><img id="paypal" src="./pay.png"></button>
+                            <input type="file" (change)="handleInputFile($event)" accept=".pdf" id="fileInput"
+                                style="display: none;">
+                            <button style="margin-left: 50px;"
+                                onclick="document.getElementById('fileInput').click()">Cargar
+                                Comprobante</button>
+                        </p>
+                        <p>
+                            <span *ngIf="archivoSeleccionado">{{ archivoSeleccionado?.name }}</span>
+                            <!-- Solo el nombre del archivo -->
+                        </p>
+                        <p>
+                            <button style="margin-left: 50px;" (click)="enviar_deuda(0)">Pagar</button>
+                            <!--                            <button style="margin-left: 60px;" (click)="pagarDeudaExtraordinaria(montoDeudaExtra.value)">Pagar</button>
+-->
                         </p>
 
                     </form>

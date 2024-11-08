@@ -10,7 +10,7 @@ export class NotificacionesService {
 
 
 
-  private apiUrl = 'http://159.54.141.160/Notificaciones/'; // URL base de la API
+  private apiUrl = 'https://localhost:44397/Notificaciones/'; // URL base de la API
 
   constructor(private http: HttpClient) {}
 

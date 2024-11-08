@@ -14,7 +14,7 @@ import  emailjs  from '@emailjs/browser';
 
 
 @Component({
-  selector: 'app-root', 
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 
@@ -48,11 +48,11 @@ export class AppComponent {
         correo: ['', Validators.required],
         ppassword: ['', Validators.required]
       })
-      
-      
+
+
   }
 /*
-  
+
   Definir_Admin() {
     this.Tipo_usuario = 'Admin';
   }
@@ -89,7 +89,7 @@ export class AppComponent {
   shouldRun = true;
 
   ngOnInit(): void {
-       
+
     $(function () {
 
       $('#login-form-link').click(function (e) {
@@ -113,7 +113,7 @@ export class AppComponent {
 
 
   iniciar_sesion(sesion: {username: string, password: string}){
-    
+
     this.data.iniciar_sesion1(sesion).subscribe((sesions) => {
 
    console.log(sesions[0].tipo_usuario);
@@ -124,7 +124,7 @@ export class AppComponent {
 
    localStorage.setItem("data", JSON.stringify(sesions[0]));
 
-   
+
 
     //localStorage.setItem("data", JSON.stringify(data));
 
@@ -133,7 +133,7 @@ export class AppComponent {
 }
 
 agregar_administrador(sesion: {username: string, correo: string, password: string, ppassword: string}){
-    
+
   if(sesion.password == sesion.ppassword){
 
     let direccion = "https://localhost:44397/api/Personas/Agregar_Administrador?nombre="+sesion.username+"&correo="+sesion.correo+"&contrasenia="+sesion.password;
@@ -144,10 +144,10 @@ agregar_administrador(sesion: {username: string, correo: string, password: strin
        sesion, {headers: headers})
        .subscribe((res) => {
          console.log(res);
-       
+
        });
   }
-  else{ 
+  else{
     console.log("error: intentalo de nuevo");
   }
 

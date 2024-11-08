@@ -63,6 +63,7 @@ export class InvitacionComponent {
     //this.generarInvitacion("fierro_ross@live.com.mx",15);
   }
 
+  nombre_fraccionamiento:string='';
   obtenerDatosInvitacion(){
     this.route.queryParams.subscribe(params => {
       const token = params['token']; // Obtiene el token de la URL
@@ -76,6 +77,7 @@ export class InvitacionComponent {
               this.UserGroup.patchValue({id_fraccionamiento: this.invitacion[0].id_fraccionamiento});
               this.UserGroup.patchValue({id_lote: 'ID del lote: '+this.invitacion[0].lote});
               this.UserGroup.patchValue({tipo_usuario:this.invitacion[0].tipo_usuario});
+              this.nombre_fraccionamiento=this.invitacion[0].nombre_fraccionamiento;
 
             } else {
               console.log(this.invitacion);
@@ -149,7 +151,8 @@ export class InvitacionComponent {
         id_fraccionamiento: this.invitacion[0].id_fraccionamiento,
         id_administrador: this.invitacion[0].id_fraccionamiento,
         id_lote: 1,
-        hikvision: "permitido"
+        codigo_acceso:this.nombre_fraccionamiento,
+        hikvision: "N/A"
 
         //  Intercomunicador: 123,
         //  Codigo_acceso: "123"
@@ -157,7 +160,7 @@ export class InvitacionComponent {
 
       console.log("params: ",usuario)
 
-      let direccion = "http://159.54.141.160/api/Usuarios/Agregar_Usuario";
+      let direccion = "https://localhost:44397/api/Usuarios/Agregar_Usuario";
 
       const headers = new HttpHeaders({ 'myHeader': 'procademy' });
       this.http.post(
@@ -165,6 +168,12 @@ export class InvitacionComponent {
         params, { headers: headers })
         .subscribe((res) => {
           console.log(res);
+          Swal.fire({
+            title: 'Genial, ya eres parte de la comunidad!!!',
+            text: '',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
           //console.log(this.usuarios[0].fecha_nacimiento);
 
 
@@ -172,6 +181,12 @@ export class InvitacionComponent {
     }
     else {
       console.log("error: intentalo de nuevo");
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor intentelo de nuevo mas tarde',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
     }
 
     //this.usuarios.push(this.UserGroup.value);

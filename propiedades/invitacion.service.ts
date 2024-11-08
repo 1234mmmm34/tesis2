@@ -12,7 +12,7 @@ export class InvitacionService {
 
 
 //private apiUrl = 'https://evaluacionesuas-001-site1.gtempurl.com/Acuerdos';
-private apiUrl = 'http://159.54.141.160/api/Usuarios';
+private apiUrl = 'https://localhost:44397/api/Usuarios';
 
 generarInvitacion(token: string,correo_electronico: string, id_fraccionamiento: number,nombre_fraccionamiento:string,nombre_admin:string,tipo_usuario:string) {
   console.log("invitacionservice");

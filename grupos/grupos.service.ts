@@ -15,27 +15,27 @@ export class GruposService {
 
 
   consultarGrupos(id_fraccionamiento: any): Observable<Grupos[]> {
-    return this.http.get<Grupos[]>("http://159.54.141.160/api/Grupos/Consultar_Grupos?id_fraccionamiento="+id_fraccionamiento);
+    return this.http.get<Grupos[]>("https://localhost:44397/api/Grupos/Consultar_Grupos?id_fraccionamiento="+id_fraccionamiento);
   }
 
 
 
 
   consultarUsuarios(id_fraccionamiento : any): Observable<usuarios[]>{
-    return this.http.get<usuarios[]>("http://159.54.141.160/api/Grupos/Consultar_Persona?id_administrador="+id_fraccionamiento)
+    return this.http.get<usuarios[]>("https://localhost:44397/api/Grupos/Consultar_Persona?id_administrador="+id_fraccionamiento)
   }
 
   consultarMiembros(id_grupo: any): Observable<usuarios[]>{
-    return this.http.get<usuarios[]>("http://159.54.141.160/api/Grupos/Consultar_Miembros?id_grupo="+id_grupo)
+    return this.http.get<usuarios[]>("https://localhost:44397/api/Grupos/Consultar_Miembros?id_grupo="+id_grupo)
   }
 
   eliminarGrupo(id_grupo: number): Observable<any> {
-    const url = `http://159.54.141.160/api/Grupos/Eliminar_Grupo?id_grupo=`+id_grupo;
+    const url = `https://localhost:44397/api/Grupos/Eliminar_Grupo?id_grupo=`+id_grupo;
     return this.http.delete(url);
   }
 
   eliminarMiembro(id_miembro: number): Observable<any> {
-    const url = `http://159.54.141.160/api/Grupos/Eliminar_Miembro?id_persona=`+id_miembro;
+    const url = `https://localhost:44397/api/Grupos/Eliminar_Miembro?id_persona=`+id_miembro;
     return this.http.delete(url);
   }
 

@@ -27,7 +27,7 @@ body {
   position: absolute;
   left: 600px;
   padding-top: 40px;
-  
+
   padding: 20px;
   color: rgb(255, 255, 255);
 
@@ -160,10 +160,10 @@ tr {
 
   display: flex;
   flex-direction: column;
- 
+
   margin-top: 50px;
   right: 40px;
- 
+
   position: absolute;
   padding-left: 50px;
   height: 500px;
